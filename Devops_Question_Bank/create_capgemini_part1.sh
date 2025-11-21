@@ -1,214 +1,297 @@
 #!/bin/bash
 set -e
 
-BASE="CGI"
+BASE="United-Layer"
 mkdir -p "$BASE"
 
-echo "Creating CGI interview markdown files..."
+echo "Creating ALL United Layer interview markdown files..."
 
 ###############################################
-# 1. General / Introduction
+# 1. General.md
 ###############################################
 cat > "$BASE/General.md" << 'EOF'
-# General / Introduction – CGI
+# General / Introduction – United Layer / Unity Cloud
 
 ## Q1. Tell me about yourself.
 ### Answer
-Short professional introduction including your cloud skills, DevOps stack, and responsibilities.
+Introduce your cloud & DevOps background, strong skills, responsibilities, and certifications.
 ### Follow-Up Points
-- Keep under 1 minute  
-- Highlight Azure, Terraform, CI/CD, AKS  
+- Keep answer under 60 seconds  
+- Highlight Azure + Terraform + AKS + CI/CD  
 ### Example
-“I work with Azure, Terraform, Kubernetes, and CI/CD automation.”
+“I build and automate cloud infra using Terraform, AKS, Azure DevOps, and monitoring tools.”
 
 ---
 
 ## Q2. Tell me about your experience.
 ### Answer
-Explain years of experience, tools, environments, main responsibilities, and achievements.
+Summarize your hands-on experience, tools, platforms, and major project responsibilities.
 ### Follow-Up Points
-- Mention certifications  
-- Highlight project scale  
+- Mention scripting + automation  
 ### Example
-“2+ years in cloud automation using Azure DevOps and Terraform.”
+“3 years in Azure Cloud, Terraform modules, AKS, CI/CD pipelines.”
+
+---
+
+## Q3. Tell me about your project.
+### Answer
+Describe architecture, microservices, deployments, storage, database, monitoring, CI/CD.
+### Follow-Up Points
+- Show clarity in flow  
+### Example
+Users → App Gateway → AKS → Microservices → Key Vault → SQL → Logs.
 
 EOF
 
 ###############################################
-# 2. Git / Version Control
+# 2. Kubernetes.md
 ###############################################
-cat > "$BASE/Git.md" << 'EOF'
-# Git / Version Control – CGI
+cat > "$BASE/Kubernetes.md" << 'EOF'
+# Kubernetes – United Layer / Unity Cloud
 
-## Q1. What is Git?
+## Q1. What is Kubernetes architecture?
 ### Answer
-Git is a distributed version control system used to track and manage source code changes.
+Master-plane + worker nodes. Components include API server, etcd, scheduler, controller manager, kubelet, kube-proxy.
 ### Follow-Up Points
-- Allows branching & merging  
+- Control plane handles orchestration  
+- Nodes run workloads  
 ### Example
-git init
+API Server → etcd → Nodes → Pods.
 
 ---
 
-## Q2. What is GitHub?
+## Q2. What are different Kubernetes components?
 ### Answer
-GitHub is a cloud-based hosting platform for Git repositories.
+API server, etcd, scheduler, controller manager, kubelet, kube-proxy, CSI, CRI.
 ### Follow-Up Points
-- Supports PR, issue tracking  
+- Control-plane vs node components  
 ### Example
-Push repo → GitHub Actions.
+Worker node = kubelet + kube-proxy.
 
 ---
 
-## Q3. Difference between Git and GitHub?
+## Q3. What are Deployments?
 ### Answer
-Git = version control tool  
-GitHub = hosting service for Git repositories.
+Used for stateless apps. Manages ReplicaSets and rollouts.
 ### Follow-Up Points
-- Git works offline  
-- GitHub adds collaboration  
+- Supports rolling updates  
 ### Example
-Git commit locally → push to GitHub.
+replicas: 3
 
 ---
 
-## Q4. What is version control?
+## Q4. What are StatefulSets?
 ### Answer
-A system that tracks changes in code and manages versions.
+Manages stateful workloads requiring stable network identity and storage.
 ### Follow-Up Points
-- Helps rollback  
-- Enables collaboration  
+- Ordered deployment  
 ### Example
-Git branching workflow.
+Databases, Zookeeper.
 
 ---
 
-## Q5. Difference between Git fetch and Git pull.
+## Q5. What is ReplicaSet?
 ### Answer
-Fetch downloads changes; pull downloads and merges them automatically.
+Ensures a specified number of pod replicas run always.
 ### Follow-Up Points
-- Pull can create conflicts  
+- Deployment manages ReplicaSet  
 ### Example
-git fetch origin
+replicas: 4
 
 ---
 
-## Q6. What is merge conflict?
+## Q6. Difference between Deployment & ReplicaSet?
 ### Answer
-Conflict when two commits modify the same lines of a file.
+Deployment manages ReplicaSet; ReplicaSet only maintains replica count.
 ### Follow-Up Points
-- Must resolve manually  
+- Deployment = higher abstraction  
 ### Example
-git merge feature-branch.
+Deployment → RS → Pods.
+
+---
+
+## Q7. What is stateless and stateful?
+### Answer
+Stateless: no saved data. Stateful: persistent state required.
+### Follow-Up Points
+- Stateless easier to scale  
+### Example
+Nginx = stateless; MySQL = stateful.
+
+---
+
+## Q8. What is ClusterIP?
+### Answer
+Internal service for cluster-only communication.
+### Follow-Up Points
+- Default service type  
+### Example
+type: ClusterIP.
+
+---
+
+## Q9. What is NodePort?
+### Answer
+Exposes service on port of every node.
+### Follow-Up Points
+- Not secure for production  
+### Example
+nodePort: 30080.
+
+---
+
+## Q10. What is LoadBalancer?
+### Answer
+Creates external load balancer with public IP.
+### Follow-Up Points
+- Common for AKS  
+### Example
+type: LoadBalancer.
+
+---
+
+## Q11. What is Ingress?
+### Answer
+Layer-7 router to route external traffic based on host/path rules.
+### Follow-Up Points
+- Works with ingress controller  
+### Example
+/api → service1.
+
+---
+
+## Q12. Ingress vs LoadBalancer?
+### Answer
+LB exposes one service; Ingress exposes many services through one IP.
+### Follow-Up Points
+- Cheaper & scalable  
+### Example
+One IP with multiple routes.
+
+---
+
+## Q13. What are liveness probes?
+### Answer
+Check if app is alive.
+### Follow-Up Points
+- Restart container if fails  
+### Example
+httpGet probe.
+
+---
+
+## Q14. What are readiness probes?
+### Answer
+Check if pod is ready to serve traffic.
+### Follow-Up Points
+- Prevents traffic to unready pods  
+### Example
+tcpSocket.
+
+---
+
+## Q15. What are startup probes?
+### Answer
+Check slow-start applications.
+### Follow-Up Points
+- Runs before liveness  
+### Example
+startupProbe config.
+
+---
+
+## Q16. What is autoscaling?
+### Answer
+Automatic scale of pods/nodes based on metrics.
+### Follow-Up Points
+- HPA/VPA/Cluster autoscaler  
+### Example
+CPU > 70% → scale 2→5.
+
+---
+
+## Q17. What is HPA?
+### Answer
+Horizontal Pod Autoscaler—scales pods based on CPU/memory or custom metrics.
+### Follow-Up Points
+- Uses metrics-server  
+### Example
+kubectl autoscale.
+
+---
+
+## Q18. What is KEDA?
+### Answer
+Event-driven autoscaler for queues, Kafka, HTTP load.
+### Follow-Up Points
+- Scale to zero  
+### Example
+Kafka trigger scale.
+
+---
+
+## Q19. Explain YAML.
+### Answer
+Human-readable data structure used for Kubernetes manifests.
+### Follow-Up Points
+- Indentation matters  
+### Example
+apiVersion, kind, metadata, spec.
+
+---
+
+## Q20. What is metadata?
+### Answer
+Labels, name, namespace, annotations.
+### Follow-Up Points
+- Used by selectors  
+### Example
+metadata: labels: app: api.
+
+---
+
+## Q21. How do you check logs of pod?
+### Answer
+kubectl logs <pod-name>
+### Follow-Up Points
+- Use --previous for crashed pods  
+### Example
+kubectl logs -f pod.
+
+---
+
+## Q22. Check pod logs via GUI?
+### Answer
+Azure Portal → AKS → Workloads → Pods → Logs.
+### Follow-Up Points
+- Container insights  
+### Example
+Open container log stream.
+
+---
+
+## Q23. CrashLoopBackOff debugging?
+### Answer
+Check logs, events, container crash codes, missing env vars, secrets, bad image, failing probes.
+### Follow-Up Points
+- Fix startup exceptions  
+### Example
+kubectl describe pod.
 
 EOF
 
-###############################################
-# 3. CI/CD – Basic to Intermediate
-###############################################
-cat > "$BASE/CI-CD.md" << 'EOF'
-# CI/CD – CGI
-
-## Q1. What is CI/CD?
-### Answer
-CI = continuously integrate code.  
-CD = continuously deliver or deploy applications.
-### Follow-Up Points
-- Automates build/test/deploy  
-### Example
-Build → Test → Deploy.
-
----
-
-## Q2. How do you usually perform CI/CD?
-### Answer
-Using Azure DevOps, GitHub Actions, or Jenkins to automate code builds and deployments.
-### Follow-Up Points
-- Multi-stage YAML  
-### Example
-Build → Push image → Deploy to AKS.
-
----
-
-## Q3. What tools do you use for CI/CD?
-### Answer
-Azure DevOps, GitHub Actions, Jenkins.
-### Follow-Up Points
-- Choose based on environment  
-### Example
-ADO pipeline with YAML.
-
----
-
-## Q4. Have you used Jenkins?
-### Answer
-Yes — configured jobs, pipelines, and used plugins for automation.
-### Follow-Up Points
-- Declarative pipeline  
-### Example
-Jenkinsfile with stages.
-
-EOF
 
 ###############################################
-# 4. Cloud Fundamentals
-###############################################
-cat > "$BASE/Cloud.md" << 'EOF'
-# Cloud Fundamentals – CGI
-
-## Q1. What clouds have you worked with?
-### Answer
-Azure as primary platform; working knowledge of AWS basics.
-### Follow-Up Points
-- Mention services used  
-### Example
-VM, VNet, AKS, Key Vault.
-
----
-
-## Q2. What is cloud computing?
-### Answer
-Delivery of computing services over the internet.
-### Follow-Up Points
-- Pay-as-you-go  
-- Scalable & flexible  
-### Example
-Serverless app on Azure Functions.
-
----
-
-## Q3. What cloud services have you used?
-### Answer
-VMs, VNets, NSGs, Storage, Key Vault, App Services, ACR, AKS, Monitor.
-### Follow-Up Points
-- Connect to real project use-case  
-### Example
-AKS + ACR deployment.
-
----
-
-## Q4. PaaS vs IaaS?
-### Answer
-IaaS = virtual machines, networking  
-PaaS = managed runtime for applications.
-### Follow-Up Points
-- PaaS reduces admin overhead  
-### Example
-App Service vs VM.
-
-EOF
-
-###############################################
-# 5. Docker / Containerization
+# 3. Docker.md
 ###############################################
 cat > "$BASE/Docker.md" << 'EOF'
-# Docker / Containers – CGI
+# Docker / Containers – United Layer
 
 ## Q1. What is Docker?
 ### Answer
-A container platform to package applications with dependencies.
+Containerization platform to package apps with dependencies.
 ### Follow-Up Points
-- Lightweight & portable  
+- Lightweight vs VM  
 ### Example
 docker run nginx
 
@@ -216,265 +299,398 @@ docker run nginx
 
 ## Q2. What is Dockerfile?
 ### Answer
-A file containing build instructions for Docker images.
+Script used to build Docker images.
 ### Follow-Up Points
-- Supports multi-stage builds  
+- Use multi-stage for optimization  
 ### Example
-FROM node:18 → COPY → RUN.
+FROM node:18
 
 ---
 
-## Q3. Difference between Docker & VM?
+## Q3. Dockerfile instructions?
 ### Answer
-VM = hypervisor virtualizes hardware  
-Docker = containers virtualize OS.
+FROM, RUN, COPY, ADD, CMD, ENTRYPOINT, EXPOSE, ENV, WORKDIR.
 ### Follow-Up Points
-- Containers are lightweight  
+- Best practice: small images  
 ### Example
-VM boots in minutes; container in seconds.
+RUN apt-get update.
+
+---
+
+## Q4. Multistage Dockerfile?
+### Answer
+Reduce image size by using separate build & runtime stages.
+### Follow-Up Points
+- Secure & lightweight  
+### Example
+FROM builder → FROM alpine.
+
+---
+
+## Q5. CMD vs ENTRYPOINT?
+### Answer
+CMD → default arguments  
+ENTRYPOINT → fixed command.
+### Follow-Up Points
+- Combine both  
+### Example
+ENTRYPOINT ["python"]; CMD ["app.py"].
+
+---
+
+## Q6. ADD vs COPY?
+### Answer
+COPY: strict copy  
+ADD: copy + URL + auto tar extract.
+### Follow-Up Points
+- Prefer COPY  
+### Example
+ADD file.tar.gz /tmp.
 
 EOF
 
 ###############################################
-# 6. Security / Secrets
-###############################################
-cat > "$BASE/Security.md" << 'EOF'
-# Security / Secrets – CGI
-
-## Q1. How do you secure application secrets?
-### Answer
-Use Key Vault, secret variables, RBAC, encryption, and avoid storing secrets in code.
-### Follow-Up Points
-- Use private endpoints  
-### Example
-ADO → Key Vault reference.
-
----
-
-## Q2. Where do you store secrets?
-### Answer
-Azure Key Vault or CI/CD secret variables.
-### Follow-Up Points
-- Rotate keys regularly  
-### Example
-KV secret reference in pipeline.
-
-EOF
-
-###############################################
-# 7. Kubernetes / YAML
-###############################################
-cat > "$BASE/Kubernetes.md" << 'EOF'
-# Kubernetes / YAML – CGI
-
-## Q1. What is YAML?
-### Answer
-Human-readable configuration language used for Kubernetes manifests.
-### Follow-Up Points
-- Indentation-based  
-### Example
-apiVersion: v1
-
----
-
-## Q2. Syntax of YAML?
-### Answer
-Key-value pairs with indentation; spaces instead of tabs.
-### Follow-Up Points
-- Supports lists & maps  
-### Example
-replicas: 3
-
----
-
-## Q3. How do you write YAML?
-### Answer
-Define apiVersion, kind, metadata, and spec.
-### Follow-Up Points
-- Use proper indentation  
-### Example
-kind: Deployment
-
----
-
-## Q4. What is Deployment in Kubernetes?
-### Answer
-A controller that manages replicas of pods.
-### Follow-Up Points
-- Supports rolling updates  
-### Example
-kubectl apply -f deployment.yaml
-
----
-
-## Q5. Deployment vs StatefulSet?
-### Answer
-Deployment = stateless  
-StatefulSet = stateful with persistent identity.
-### Follow-Up Points
-- Ordered deployment  
-### Example
-DB → StatefulSet.
-
----
-
-## Q6. What is a pod?
-### Answer
-Smallest deployable unit in Kubernetes.
-### Follow-Up Points
-- Contains containers  
-### Example
-kubectl get pods.
-
----
-
-## Q7. ClusterIP, NodePort, LoadBalancer?
-### Answer
-ClusterIP = internal  
-NodePort = expose on node  
-LoadBalancer = external service.
-### Follow-Up Points
-- Default = ClusterIP  
-
----
-
-## Q8. Ingress vs LoadBalancer?
-### Answer
-LoadBalancer exposes service externally.  
-Ingress provides routing based on host/path.
-### Follow-Up Points
-- Ingress is L7  
-### Example
-/api → pod A.
-
----
-
-## Q9. How do you check logs in Kubernetes?
-### Answer
-Use kubectl logs <pod>.
-### Follow-Up Points
-- Use describe for events  
-### Example
-kubectl logs api-pod.
-
----
-
-## Q10. How do you monitor cluster?
-### Answer
-Use Azure Monitor, Container Insights, or Prometheus/Grafana.
-### Follow-Up Points
-- Track nodes & pods  
-### Example
-Enable Insights in AKS.
-
-EOF
-
-###############################################
-# 8. DevOps Concepts
-###############################################
-cat > "$BASE/DevOps.md" << 'EOF'
-# DevOps Concepts – CGI
-
-## Q1. What is DevOps?
-### Answer
-A culture and practice combining development & operations for rapid, reliable delivery.
-### Follow-Up Points
-- Automation focus  
-### Example
-CI/CD pipeline automation.
-
----
-
-## Q2. What DevOps tools do you know?
-### Answer
-Azure DevOps, GitHub, Jenkins, Terraform, Docker, Kubernetes, Grafana, Prometheus.
-### Follow-Up Points
-- Map tools to purpose  
-### Example
-Terraform → IaC.
-
----
-
-## Q3. What is automation in DevOps?
-### Answer
-Automating repetitive tasks like deployment, testing, provisioning, and monitoring.
-### Follow-Up Points
-- Reduces errors  
-### Example
-Automated YAML pipeline.
-
----
-
-## Q4. What is configuration management?
-### Answer
-Managing system configuration consistently using tools like Ansible, Chef, Puppet.
-### Follow-Up Points
-- Ensures consistency  
-### Example
-Ansible playbooks.
-
-EOF
-
-###############################################
-# 9. Terraform
+# 4. Terraform.md
 ###############################################
 cat > "$BASE/Terraform.md" << 'EOF'
-# Terraform – CGI
+# Terraform – United Layer
 
 ## Q1. What is Terraform?
 ### Answer
-An Infrastructure-as-Code tool that automates provisioning.
+Infra-as-Code tool for declarative provisioning.
 ### Follow-Up Points
-- Declarative model  
+- Platform agnostic  
 ### Example
-resource "azurerm_resource_group".
+resource "azurerm_vnet".
 
 ---
 
-## Q2. Why do we use Terraform?
+## Q2. Why Terraform over ARM?
 ### Answer
-To manage infra consistently, repeatedly, and version-controlled.
+Reusable modules, version control, multiplatform support, cleaner code.
 ### Follow-Up Points
-- Works across clouds  
+- ARM = verbose  
 ### Example
-Terraform modules.
+Terraform modules reduce duplication.
 
 ---
 
-## Q3. What are providers?
+## Q3. What is Terraform state file?
 ### Answer
-Plugins that allow Terraform to interact with cloud APIs.
+Stores current infra state.
 ### Follow-Up Points
-- Must run init  
+- Sensitive → secure it  
 ### Example
-provider "azurerm".
+terraform.tfstate.
+
+---
+
+## Q4. How to secure Terraform state file?
+### Answer
+Remote backend, encryption, RBAC, soft delete, private endpoints.
+### Follow-Up Points
+- Azure Storage backend  
+### Example
+backend "azurerm".
+
+---
+
+## Q5. What is module?
+### Answer
+Reusable infra component folder.
+### Follow-Up Points
+- DRY code  
+### Example
+module "network" { source="./modules/network" }
+
+---
+
+## Q6. What is data source?
+### Answer
+Reads existing resources.
+### Follow-Up Points
+- Read-only  
+### Example
+data "azurerm_resource_group".
+
+---
+
+## Q7. What is null resource?
+### Answer
+Runs provisioners without creating infra.
+### Follow-Up Points
+- Helpful for scripts  
+### Example
+triggers = { always = timestamp() }
+
+---
+
+## Q8. What is backend?
+### Answer
+Location where state file is stored.
+### Follow-Up Points
+- Used for collaboration  
+### Example
+Azure Storage backend.
+
+---
+
+## Q9. How do you deploy infra using CI/CD?
+### Answer
+Pipeline → init → validate → plan → apply → approval → destroy.
+### Follow-Up Points
+- Use service connection  
+### Example
+Terraform tasks in Azure DevOps.
 
 EOF
 
 ###############################################
-# 10. Monitoring / Logs
+# 5. Azure-Cloud.md
+###############################################
+cat > "$BASE/Azure-Cloud.md" << 'EOF'
+# Azure Cloud – United Layer
+
+## Q1. What is VMSS?
+### Answer
+Scales VM instances automatically.
+### Follow-Up Points
+- Works with load balancer  
+### Example
+Autoscale rule CPU > 70%.
+
+---
+
+## Q2. What is Application Gateway?
+### Answer
+Layer 7 load balancer with routing + WAF.
+### Follow-Up Points
+- SSL termination  
+### Example
+Path rule: /app → backend pool.
+
+---
+
+## Q3. What is NSG?
+### Answer
+Firewall filtering inbound & outbound traffic.
+### Follow-Up Points
+- Priority-based  
+### Example
+Allow 80; Deny all.
+
+---
+
+## Q4. How do you secure secrets?
+### Answer
+Use Key Vault, RBAC, private endpoints, managed identity.
+### Follow-Up Points
+- No secrets in YAML  
+### Example
+Key Vault integration with pipeline.
+
+EOF
+
+
+###############################################
+# 6. Monitoring.md
 ###############################################
 cat > "$BASE/Monitoring.md" << 'EOF'
-# Monitoring / Logs – CGI
+# Monitoring – United Layer
 
-## Q1. How do you check logs in Kubernetes?
+## Q1. How do you monitor Kubernetes?
 ### Answer
-Use kubectl logs <pod>.
+Azure Monitor, Container Insights, Prometheus, Grafana.
 ### Follow-Up Points
-- Use describe for events  
+- Check pod/node metrics  
 ### Example
-kubectl logs app-pod.
+kubectl top nodes.
 
 ---
 
-## Q2. How do you monitor cluster?
+## Q2. How do you monitor VMs?
 ### Answer
-Use Container Insights, Log Analytics, Prometheus, Grafana.
+Azure Monitor, Log Analytics, diagnostic settings.
 ### Follow-Up Points
-- Monitor nodes, pod health  
+- Set alerts  
 ### Example
-Enable Insights in AKS.
+CPU > 80% alert.
+
+---
+
+## Q3. How do you monitor pods?
+### Answer
+kubectl top pod, container insights, dashboards.
+### Follow-Up Points
+- Review restarts  
+### Example
+kubectl get pods -o wide.
 
 EOF
 
-echo "CGI – All markdown files created successfully!"
+###############################################
+# 7. CI-CD.md
+###############################################
+cat > "$BASE/CI-CD.md" << 'EOF'
+# CI/CD – United Layer
+
+## Q1. What is Azure Pipeline?
+### Answer
+CI/CD workflow for build, test, and deployment automation.
+### Follow-Up Points
+- YAML based  
+### Example
+trigger: main.
+
+---
+
+## Q2. Draft pipeline in YAML?
+### Answer
+Define stages → jobs → tasks → environment → approvals.
+### Follow-Up Points
+- Reusable templates  
+### Example
+stages: build → deploy.
+
+---
+
+## Q3. How to deploy containers using pipeline?
+### Answer
+Build image → push to ACR → kubectl/Helm deploy.
+### Follow-Up Points
+- Use service connection  
+### Example
+az acr build.
+
+---
+
+## Q4. CI/CD with Kubernetes?
+### Answer
+Push image → update manifests → rollout deployment → verify health.
+### Follow-Up Points
+- Rolling updates  
+### Example
+kubectl set image.
+
+EOF
+
+###############################################
+# 8. Git.md
+###############################################
+cat > "$BASE/Git.md" << 'EOF'
+# Git – United Layer
+
+## Q1. Git Fetch vs Git Pull?
+### Answer
+Fetch = download  
+Pull = fetch + merge.
+### Follow-Up Points
+- Pull may cause conflicts  
+### Example
+git fetch origin.
+
+---
+
+## Q2. What is merge conflict?
+### Answer
+Conflict in code versions during merge.
+### Follow-Up Points
+- Happens when editing same line  
+### Example
+Resolve manually.
+
+EOF
+
+###############################################
+# 9. DevOps-Concepts.md
+###############################################
+cat > "$BASE/DevOps-Concepts.md" << 'EOF'
+# DevOps Concepts – United Layer
+
+## Q1. What is DevOps?
+### Answer
+Combination of development & operations to achieve faster delivery.
+### Follow-Up Points
+- Automation + collaboration  
+### Example
+CI/CD → AKS deployment.
+
+---
+
+## Q2. What is automation?
+### Answer
+Eliminating manual work using scripts & pipelines.
+### Follow-Up Points
+- Improves reliability  
+### Example
+Terraform + YAML pipelines.
+
+---
+
+## Q3. What is configuration management?
+### Answer
+Managing system configs consistently.
+### Follow-Up Points
+- Tools: Ansible, Chef  
+### Example
+Automated server configuration.
+
+EOF
+
+###############################################
+# 10. Troubleshooting.md
+###############################################
+cat > "$BASE/Troubleshooting.md" << 'EOF'
+# Troubleshooting – United Layer
+
+## Q1. Pod crashing — how do you debug?
+### Answer
+Check logs, events, probes, env vars, images, secrets, ports.
+### Follow-Up Points
+- Check exit code  
+### Example
+kubectl logs --previous.
+
+---
+
+## Q2. Developer unable to push code?
+### Answer
+Check repo permissions, branch policies, authentication, token expiry.
+### Follow-Up Points
+- Validate Azure DevOps access  
+### Example
+Reset PAT.
+
+---
+
+## Q3. Pipeline failing?
+### Answer
+Check logs, variables, service connections, YAML indentation, permissions.
+### Follow-Up Points
+- Validate agent  
+### Example
+Re-run failed stage.
+
+---
+
+## Q4. VM connectivity issue?
+### Answer
+Check NSG, firewall, IP, DNS, SSH/RDP settings, NIC issues.
+### Follow-Up Points
+- Use Serial Console  
+### Example
+Reset NIC.
+
+---
+
+## Q5. Application slow after deployment?
+### Answer
+Check CPU, memory, logs, backend health, scaling, probes, disk I/O.
+### Follow-Up Points
+- Use App Insights  
+### Example
+Check response times.
+
+EOF
+
+echo "United Layer – All markdown files created successfully!"
