@@ -1,404 +1,480 @@
 #!/bin/bash
 set -e
 
-BASE="Infosys"
+BASE="CGI"
 mkdir -p "$BASE"
 
-echo "Creating Infosys interview markdown files..."
+echo "Creating CGI interview markdown files..."
 
 ###############################################
-# 1. General
+# 1. General / Introduction
 ###############################################
 cat > "$BASE/General.md" << 'EOF'
-# General / Introduction – Infosys Interview Questions
+# General / Introduction – CGI
 
-## Q1. Tell me about yourself?
+## Q1. Tell me about yourself.
 ### Answer
-Give a short introduction covering your experience, cloud technologies, DevOps tools, and strengths.
+Short professional introduction including your cloud skills, DevOps stack, and responsibilities.
 ### Follow-Up Points
-- Keep it within 45–60 seconds  
-- Highlight Azure, Terraform, CI/CD, Kubernetes  
+- Keep under 1 minute  
+- Highlight Azure, Terraform, CI/CD, AKS  
+### Example
+“I work with Azure, Terraform, Kubernetes, and CI/CD automation.”
+
+---
+
+## Q2. Tell me about your experience.
+### Answer
+Explain years of experience, tools, environments, main responsibilities, and achievements.
+### Follow-Up Points
 - Mention certifications  
+- Highlight project scale  
 ### Example
-“I work with Azure, Terraform, ADO, AKS, Docker, and automation. I design CI/CD pipelines and provision infra using IaC.”
-
----
-
-## Q2. Tell me about your daily routine?
-### Answer
-Explain your daily DevOps responsibilities such as CI/CD monitoring, infra updates, deployments, meetings, and troubleshooting.
-### Follow-Up Points
-- Show ownership  
-- Mention ticketing + standups  
-- Mention automation improvements  
-### Example
-“Monitor pipelines, provision infra, fix issues, review PRs, and automate manual tasks.”
+“2+ years in cloud automation using Azure DevOps and Terraform.”
 
 EOF
 
 ###############################################
-# 2. Azure DevOps
+# 2. Git / Version Control
 ###############################################
-cat > "$BASE/Azure-DevOps.md" << 'EOF'
-# Azure DevOps (ADO) – Infosys Interview Questions
+cat > "$BASE/Git.md" << 'EOF'
+# Git / Version Control – CGI
 
-## Q1. Tell Azure DevOps features?
+## Q1. What is Git?
 ### Answer
-Azure DevOps provides Repos, Pipelines, Boards, Artifacts, Test Plans, and deployment automation.
+Git is a distributed version control system used to track and manage source code changes.
 ### Follow-Up Points
-- Supports YAML pipelines  
-- Integrates with GitHub & Azure services  
+- Allows branching & merging  
 ### Example
-ADO used for CI/CD + Azure deployments via service connections.
+git init
 
 ---
 
-## Q2. What is the difference between Azure Repos and Boards?
+## Q2. What is GitHub?
 ### Answer
-Repos store Git code; Boards manage work items, sprints, tasks, and bugs.
+GitHub is a cloud-based hosting platform for Git repositories.
 ### Follow-Up Points
-- Boards = Agile project management  
-- Repos = version control  
+- Supports PR, issue tracking  
 ### Example
-Boards → User Stories; Repos → Code for microservices.
+Push repo → GitHub Actions.
 
 ---
 
-## Q3. How do you push code to Azure Repos?
+## Q3. Difference between Git and GitHub?
 ### Answer
-Clone repo → make changes → commit → push.
+Git = version control tool  
+GitHub = hosting service for Git repositories.
 ### Follow-Up Points
-- Use PAT for access if required  
-- Enforce PR policies  
+- Git works offline  
+- GitHub adds collaboration  
 ### Example
-git clone <repo-url>  
-git add .  
-git commit -m "update"  
-git push origin main
+Git commit locally → push to GitHub.
 
 ---
 
-## Q4. What applications/plugins can you use in Azure DevOps?
+## Q4. What is version control?
 ### Answer
-Terraform, SonarQube, Docker, Kubernetes, Azure CLI, Key Vault tasks, and marketplace extensions.
+A system that tracks changes in code and manages versions.
 ### Follow-Up Points
-- Use installable extensions  
-- Use custom tasks or scripts  
+- Helps rollback  
+- Enables collaboration  
 ### Example
-Terraform task for infra deployment.
+Git branching workflow.
 
 ---
 
-## Q5. If a new engineer joins your team, how will you give permission in Azure DevOps?
+## Q5. Difference between Git fetch and Git pull.
 ### Answer
-Add user through Project Settings → Permissions → assign role (Contributor/Reader).
+Fetch downloads changes; pull downloads and merges them automatically.
 ### Follow-Up Points
-- Use least-privilege  
-- Control repo/pipeline access  
+- Pull can create conflicts  
 ### Example
-Give read access to prod pipeline; write to dev.
+git fetch origin
 
 ---
 
-## Q6. What level of permission will you give?
+## Q6. What is merge conflict?
 ### Answer
-Contributor for day-to-day work, Reader for viewing-only, and limited access to sensitive pipelines.
+Conflict when two commits modify the same lines of a file.
 ### Follow-Up Points
-- Ensure repo protections  
-- Avoid giving admin roles  
+- Must resolve manually  
 ### Example
-Contributor: push code + run pipelines.
-
----
-
-## Q7. If a user cannot connect to a production server VM, what steps will you take?
-### Answer
-Check NSG rules, VM status, credentials, firewall, network path, and RBAC permissions.
-### Follow-Up Points
-- Check monitoring logs  
-- Validate Bastion/VPN  
-### Example
-az network watcher test-connectivity --source user --dest vm
-
----
-
-## Q8. What is the flow of CI/CD pipeline with Kubernetes cluster?
-### Answer
-Code → Build → Push Docker image → Deploy to AKS using manifests/Helm → Validation tests.
-### Follow-Up Points
-- Use ACR  
-- Use service connections  
-### Example
-kubectl apply -f deployment.yaml from pipeline.
+git merge feature-branch.
 
 EOF
 
 ###############################################
-# 3. CI/CD
+# 3. CI/CD – Basic to Intermediate
 ###############################################
 cat > "$BASE/CI-CD.md" << 'EOF'
-# CI/CD Pipeline – Infosys Interview Questions
+# CI/CD – CGI
 
-## Q1. How do you handle secrets in CI/CD?
+## Q1. What is CI/CD?
 ### Answer
-Use secret variables, Key Vault integration, managed identities, and avoid secrets in repo.
+CI = continuously integrate code.  
+CD = continuously deliver or deploy applications.
 ### Follow-Up Points
-- Mask secrets  
-- Rotate credentials  
+- Automates build/test/deploy  
 ### Example
-AzureKeyVault@2 to fetch secrets at runtime.
+Build → Test → Deploy.
 
 ---
 
-## Q2. How do you provision infrastructure? (CI/CD)
+## Q2. How do you usually perform CI/CD?
 ### Answer
-Use Terraform tasks in Azure DevOps pipeline with remote backend and service connection authentication.
+Using Azure DevOps, GitHub Actions, or Jenkins to automate code builds and deployments.
 ### Follow-Up Points
-- Use Terraform plan → approval → apply  
-- Separate dev/stage/prod tfvars  
+- Multi-stage YAML  
 ### Example
-Terraform CLI task: init → plan → apply.
+Build → Push image → Deploy to AKS.
 
 ---
 
-## Q3. Tell me about your CI/CD deployment process.
+## Q3. What tools do you use for CI/CD?
 ### Answer
-Code commit → PR → Build → Test → Scan → Deploy → Approvals → Release to prod.
+Azure DevOps, GitHub Actions, Jenkins.
 ### Follow-Up Points
-- Use multi-stage pipelines  
-- Add quality gates  
+- Choose based on environment  
 ### Example
-Build stage → Deploy to AKS stage → Validation.
+ADO pipeline with YAML.
+
+---
+
+## Q4. Have you used Jenkins?
+### Answer
+Yes — configured jobs, pipelines, and used plugins for automation.
+### Follow-Up Points
+- Declarative pipeline  
+### Example
+Jenkinsfile with stages.
 
 EOF
 
 ###############################################
-# 4. Terraform
+# 4. Cloud Fundamentals
 ###############################################
-cat > "$BASE/Terraform.md" << 'EOF'
-# Terraform – Infosys Interview Questions
+cat > "$BASE/Cloud.md" << 'EOF'
+# Cloud Fundamentals – CGI
 
-## Q1. How do you provision infrastructure?
+## Q1. What clouds have you worked with?
 ### Answer
-Write Terraform configuration → init → plan → apply using CI/CD pipeline with remote backend.
+Azure as primary platform; working knowledge of AWS basics.
 ### Follow-Up Points
-- Use modules  
-- Separate state per environment  
+- Mention services used  
 ### Example
-terraform apply -var-file="prod.tfvars"
+VM, VNet, AKS, Key Vault.
 
 ---
 
-## Q2. Tell me key features of Terraform?
+## Q2. What is cloud computing?
 ### Answer
-Declarative, idempotent, multi-cloud, uses state, modular, and supports dependency graph.
+Delivery of computing services over the internet.
 ### Follow-Up Points
-- Plan → predicts changes  
-- Provider ecosystem  
+- Pay-as-you-go  
+- Scalable & flexible  
 ### Example
-Provision AKS, ACR, VNet in one config.
+Serverless app on Azure Functions.
 
 ---
 
-## Q3. Tell me difference between init, plan, apply?
+## Q3. What cloud services have you used?
 ### Answer
-init → setup provider/plugins  
-plan → preview changes  
-apply → execute changes  
+VMs, VNets, NSGs, Storage, Key Vault, App Services, ACR, AKS, Monitor.
 ### Follow-Up Points
-- Apply is irreversible  
-- Plan is safe and read-only  
+- Connect to real project use-case  
 ### Example
-terraform init → terraform plan → terraform apply
+AKS + ACR deployment.
 
 ---
 
-## Q4. Why do we use Terraform? Benefits?
+## Q4. PaaS vs IaaS?
 ### Answer
-Automates infra creation, ensures consistency, supports versioning, avoids manual errors, and is reusable through modules.
+IaaS = virtual machines, networking  
+PaaS = managed runtime for applications.
 ### Follow-Up Points
-- Infra as code  
-- Environment standardization  
+- PaaS reduces admin overhead  
 ### Example
-Same module → dev, stage, prod.
+App Service vs VM.
 
 EOF
 
 ###############################################
-# 5. Azure Cloud Services
+# 5. Docker / Containerization
 ###############################################
-cat > "$BASE/Azure-Cloud.md" << 'EOF'
-# Azure Cloud Services – Infosys Interview Questions
+cat > "$BASE/Docker.md" << 'EOF'
+# Docker / Containers – CGI
 
-## Q1. Have you worked with Azure Web App Services?
+## Q1. What is Docker?
 ### Answer
-Yes, App Services are PaaS offerings for hosting web apps and APIs.
+A container platform to package applications with dependencies.
 ### Follow-Up Points
-- Deployment slots  
-- Auto-scaling  
+- Lightweight & portable  
 ### Example
-Deploy using “az webapp deploy”.
+docker run nginx
 
 ---
 
-## Q2. Do you also work with PaaS services?
+## Q2. What is Dockerfile?
 ### Answer
-Yes — App Services, SQL PaaS, Key Vault, Storage, Event Hub, Functions.
+A file containing build instructions for Docker images.
 ### Follow-Up Points
-- Highlight managed services  
+- Supports multi-stage builds  
 ### Example
-SQL PaaS → no OS maintenance.
+FROM node:18 → COPY → RUN.
 
 ---
 
-## Q3. How do you provision SQL database?
+## Q3. Difference between Docker & VM?
 ### Answer
-Use Azure SQL Database via portal, CLI, Terraform, or DevOps pipelines.
+VM = hypervisor virtualizes hardware  
+Docker = containers virtualize OS.
 ### Follow-Up Points
-- Configure firewall rules  
+- Containers are lightweight  
+### Example
+VM boots in minutes; container in seconds.
+
+EOF
+
+###############################################
+# 6. Security / Secrets
+###############################################
+cat > "$BASE/Security.md" << 'EOF'
+# Security / Secrets – CGI
+
+## Q1. How do you secure application secrets?
+### Answer
+Use Key Vault, secret variables, RBAC, encryption, and avoid storing secrets in code.
+### Follow-Up Points
 - Use private endpoints  
 ### Example
-az sql db create --name mydb
+ADO → Key Vault reference.
 
 ---
 
-## Q4. Why SQL PaaS instead of SQL on VM?
+## Q2. Where do you store secrets?
 ### Answer
-SQL PaaS handles patches, backups, HA, DR, and scaling automatically.
+Azure Key Vault or CI/CD secret variables.
 ### Follow-Up Points
-- No OS-level management  
-- More secure  
+- Rotate keys regularly  
 ### Example
-Automated point-in-time restore.
-
----
-
-## Q5. If database is deleted, how can we recover it?
-### Answer
-Azure SQL PaaS supports point-in-time restore and backup retention.
-### Follow-Up Points
-- Up to 35 days retention  
-### Example
-Restore from deleted server blade.
-
----
-
-## Q6. How to connect SQL database with application?
-### Answer
-Use connection strings stored in Key Vault or App Settings.
-### Follow-Up Points
-- Use Managed Identity where possible  
-### Example
-SQL connection string → WebApp settings.
-
----
-
-## Q7. What Azure services have you worked on?
-### Answer
-VMs, VNets, NSGs, App Services, SQL, Storage, Key Vault, ACR, AKS, Monitor.
-### Follow-Up Points
-- Mention real infra  
-### Example
-AKS + ACR + private endpoints.
+KV secret reference in pipeline.
 
 EOF
 
 ###############################################
-# 6. Kubernetes
+# 7. Kubernetes / YAML
 ###############################################
 cat > "$BASE/Kubernetes.md" << 'EOF'
-# Kubernetes – Infosys Interview Questions
+# Kubernetes / YAML – CGI
 
-## Q1. Do you know about replica sets?
+## Q1. What is YAML?
 ### Answer
-ReplicaSets ensure a fixed number of pod replicas are always running.
+Human-readable configuration language used for Kubernetes manifests.
 ### Follow-Up Points
-- Deployment uses ReplicaSets  
-- Self-healing  
+- Indentation-based  
 ### Example
-kubectl get rs
+apiVersion: v1
 
 ---
 
-## Q2. What is the flow of CI/CD with Kubernetes?
+## Q2. Syntax of YAML?
 ### Answer
-Build → push Docker image → update manifest/Helm → deploy to AKS → health checks.
+Key-value pairs with indentation; spaces instead of tabs.
 ### Follow-Up Points
-- Use service connections  
+- Supports lists & maps  
 ### Example
-kubectl set image deployment/app app=repo/app:v2
+replicas: 3
 
 ---
 
-## Q3. How do you deploy containers using ADO?
+## Q3. How do you write YAML?
 ### Answer
-Build Docker image → Push to ACR → Kubernetes manifest task to deploy.
+Define apiVersion, kind, metadata, and spec.
 ### Follow-Up Points
-- Use kubeconfig or service connection  
+- Use proper indentation  
+### Example
+kind: Deployment
+
+---
+
+## Q4. What is Deployment in Kubernetes?
+### Answer
+A controller that manages replicas of pods.
+### Follow-Up Points
+- Supports rolling updates  
 ### Example
 kubectl apply -f deployment.yaml
 
 ---
 
-## Q4. How to enable monitoring in Kubernetes?
+## Q5. Deployment vs StatefulSet?
 ### Answer
-Enable Container Insights or install Prometheus/Grafana.
+Deployment = stateless  
+StatefulSet = stateful with persistent identity.
 ### Follow-Up Points
-- Monitor pods, nodes, containers  
+- Ordered deployment  
 ### Example
-az aks enable-addons --addons monitoring
+DB → StatefulSet.
+
+---
+
+## Q6. What is a pod?
+### Answer
+Smallest deployable unit in Kubernetes.
+### Follow-Up Points
+- Contains containers  
+### Example
+kubectl get pods.
+
+---
+
+## Q7. ClusterIP, NodePort, LoadBalancer?
+### Answer
+ClusterIP = internal  
+NodePort = expose on node  
+LoadBalancer = external service.
+### Follow-Up Points
+- Default = ClusterIP  
+
+---
+
+## Q8. Ingress vs LoadBalancer?
+### Answer
+LoadBalancer exposes service externally.  
+Ingress provides routing based on host/path.
+### Follow-Up Points
+- Ingress is L7  
+### Example
+/api → pod A.
+
+---
+
+## Q9. How do you check logs in Kubernetes?
+### Answer
+Use kubectl logs <pod>.
+### Follow-Up Points
+- Use describe for events  
+### Example
+kubectl logs api-pod.
+
+---
+
+## Q10. How do you monitor cluster?
+### Answer
+Use Azure Monitor, Container Insights, or Prometheus/Grafana.
+### Follow-Up Points
+- Track nodes & pods  
+### Example
+Enable Insights in AKS.
 
 EOF
 
 ###############################################
-# 7. Monitoring
+# 8. DevOps Concepts
+###############################################
+cat > "$BASE/DevOps.md" << 'EOF'
+# DevOps Concepts – CGI
+
+## Q1. What is DevOps?
+### Answer
+A culture and practice combining development & operations for rapid, reliable delivery.
+### Follow-Up Points
+- Automation focus  
+### Example
+CI/CD pipeline automation.
+
+---
+
+## Q2. What DevOps tools do you know?
+### Answer
+Azure DevOps, GitHub, Jenkins, Terraform, Docker, Kubernetes, Grafana, Prometheus.
+### Follow-Up Points
+- Map tools to purpose  
+### Example
+Terraform → IaC.
+
+---
+
+## Q3. What is automation in DevOps?
+### Answer
+Automating repetitive tasks like deployment, testing, provisioning, and monitoring.
+### Follow-Up Points
+- Reduces errors  
+### Example
+Automated YAML pipeline.
+
+---
+
+## Q4. What is configuration management?
+### Answer
+Managing system configuration consistently using tools like Ansible, Chef, Puppet.
+### Follow-Up Points
+- Ensures consistency  
+### Example
+Ansible playbooks.
+
+EOF
+
+###############################################
+# 9. Terraform
+###############################################
+cat > "$BASE/Terraform.md" << 'EOF'
+# Terraform – CGI
+
+## Q1. What is Terraform?
+### Answer
+An Infrastructure-as-Code tool that automates provisioning.
+### Follow-Up Points
+- Declarative model  
+### Example
+resource "azurerm_resource_group".
+
+---
+
+## Q2. Why do we use Terraform?
+### Answer
+To manage infra consistently, repeatedly, and version-controlled.
+### Follow-Up Points
+- Works across clouds  
+### Example
+Terraform modules.
+
+---
+
+## Q3. What are providers?
+### Answer
+Plugins that allow Terraform to interact with cloud APIs.
+### Follow-Up Points
+- Must run init  
+### Example
+provider "azurerm".
+
+EOF
+
+###############################################
+# 10. Monitoring / Logs
 ###############################################
 cat > "$BASE/Monitoring.md" << 'EOF'
-# Monitoring – Infosys Interview Questions
+# Monitoring / Logs – CGI
 
-## Q1. Tell me about Log Analytics or Application Insights?
+## Q1. How do you check logs in Kubernetes?
 ### Answer
-Log Analytics collects logs/metrics in a workspace; App Insights monitors applications with dependencies and performance insights.
+Use kubectl logs <pod>.
 ### Follow-Up Points
-- KQL queries  
-- Dashboards + alerts  
+- Use describe for events  
 ### Example
-Heartbeat | summarize count() by Computer
+kubectl logs app-pod.
+
+---
+
+## Q2. How do you monitor cluster?
+### Answer
+Use Container Insights, Log Analytics, Prometheus, Grafana.
+### Follow-Up Points
+- Monitor nodes, pod health  
+### Example
+Enable Insights in AKS.
 
 EOF
 
-###############################################
-# 8. Troubleshooting
-###############################################
-cat > "$BASE/Troubleshooting.md" << 'EOF'
-# Troubleshooting – Infosys Interview Questions
-
-## Q1. A user not able to connect to production VM — what steps to take?
-### Answer
-Check VM power state, NSG rules, firewall, Bastion/VPN access, credentials, and diagnostics logs.
-### Follow-Up Points
-- Check network route  
-- Validate RBAC  
-### Example
-az network watcher test-connectivity
-
-EOF
-
-###############################################
-# 9. Security
-###############################################
-cat > "$BASE/Security.md" << 'EOF'
-# Security / Secrets – Infosys Interview Questions
-
-## Q1. How do you handle secrets in CI/CD?
-### Answer
-Use Key Vault, secret variables, masked logs, and service connections. Never store secrets in repo.
-### Follow-Up Points
-- Use RBAC  
-- Rotate regularly  
-### Example
-AzureKeyVault@2 → fetch at runtime.
-
-EOF
-
-echo "Infosys – All markdown files created successfully!"
+echo "CGI – All markdown files created successfully!"
