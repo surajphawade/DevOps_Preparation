@@ -1,193 +1,135 @@
 #!/bin/bash
 set -e
 
-BASE="Publicis-Sapient"
+BASE="Infosys"
 mkdir -p "$BASE"
 
-echo "Creating full Publicis Sapient folder with all markdown files..."
+echo "Creating Infosys interview markdown files..."
 
 ###############################################
-# 1. Azure Cloud
+# 1. General
 ###############################################
-cat > "$BASE/Azure-Cloud.md" << 'EOF'
-# Azure Cloud – Publicis Sapient Interview Questions
+cat > "$BASE/General.md" << 'EOF'
+# General / Introduction – Infosys Interview Questions
 
-## Q1. What is VNet?
+## Q1. Tell me about yourself?
 ### Answer
-A Virtual Network (VNet) is an isolated private network in Azure used to securely host resources like VMs, databases, containers, and applications.
+Give a short introduction covering your experience, cloud technologies, DevOps tools, and strengths.
 ### Follow-Up Points
-- Logical isolation  
-- Subnets, routing, NSG  
-- Hybrid connectivity  
+- Keep it within 45–60 seconds  
+- Highlight Azure, Terraform, CI/CD, Kubernetes  
+- Mention certifications  
 ### Example
-az network vnet create --name myvnet --address-prefix 10.0.0.0/16
+“I work with Azure, Terraform, ADO, AKS, Docker, and automation. I design CI/CD pipelines and provision infra using IaC.”
 
 ---
 
-## Q2. How are you balancing traffic in cloud?
+## Q2. Tell me about your daily routine?
 ### Answer
-Traffic is balanced using Azure Load Balancer (Layer 4) or Application Gateway (Layer 7).
+Explain your daily DevOps responsibilities such as CI/CD monitoring, infra updates, deployments, meetings, and troubleshooting.
 ### Follow-Up Points
-- LB = TCP/UDP  
-- App Gateway = HTTP/HTTPS + WAF  
-- Choose based on layer requirement  
+- Show ownership  
+- Mention ticketing + standups  
+- Mention automation improvements  
 ### Example
-App Gateway for HTTPS + path routing.
-
----
-
-## Q3. How many types of load balancers?
-### Answer
-Azure provides:  
-- Public Load Balancer  
-- Internal Load Balancer  
-- Application Gateway  
-- Traffic Manager  
-- Front Door
-### Follow-Up Points
-- Layer 4 vs Layer 7  
-- Global vs regional  
-### Example
-Traffic Manager for global routing.
-
----
-
-## Q4. What is priority in NSG?
-### Answer
-NSG rules use priority numbers to determine evaluation order (lower = higher priority).
-### Follow-Up Points
-- Range 100–4096  
-- First match wins  
-- Deny overrides allow  
-### Example
-Rule priority 100 blocks traffic first.
-
----
-
-## Q5. What is service endpoint and private endpoint?
-### Answer
-Service Endpoint: Extends VNet identity to Azure services via Microsoft backbone.  
-Private Endpoint: Allocates private IP to the service in your VNet.
-### Follow-Up Points
-- Private Endpoint = More secure  
-- Blocks public access  
-### Example
-Private Endpoint for Storage Account.
-
----
-
-## Q6. How do you securely access your resources?
-### Answer
-Use Private Endpoints, Bastion, RBAC, Managed Identity, NSG rules, and VPN/ExpressRoute.
-### Follow-Up Points
-- Disable public access  
-- Use conditional access  
-### Example
-VM access via Azure Bastion.
-
----
-
-## Q7. What is bastion host? Why is it used?
-### Answer
-Azure Bastion provides RDP/SSH access to VMs over SSL without needing public IPs.
-### Follow-Up Points
-- Secure alternative to public SSH/RDP  
-- Integrated with portal  
-### Example
-VM → Connect → Bastion.
-
----
-
-## Q8. What are NSG rules?
-### Answer
-NSG rules control inbound and outbound traffic to subnets or NICs.
-### Follow-Up Points
-- Priority-based  
-- Source/destination/port/protocol  
-### Example
-Allow port 22 for Linux VMs.
-
----
-
-## Q9. How do you restrict any service on a resource?
-### Answer
-Use NSG, route tables, firewall, private endpoints, RBAC, or policy to block/limit access.
-### Follow-Up Points
-- Best option depends on service type  
-### Example
-Deny inbound port 3389 for all users.
-
----
-
-## Q10. What network topology have you worked with?
-### Answer
-Hub-Spoke, Mesh, or Flat topology.
-### Follow-Up Points
-- Hub hosts shared services  
-- Spokes isolate workloads  
-### Example
-Hub → Firewall + VPN; Spokes → App, DB subnets.
-
----
-
-## Q11. How do you connect your on-prem application to cloud?
-### Answer
-Use VPN Gateway or ExpressRoute for hybrid connectivity.
-### Follow-Up Points
-- Site-to-Site VPN  
-- VNet peering for cloud-only  
-### Example
-On-prem firewall → VPN → Azure VNet.
+“Monitor pipelines, provision infra, fix issues, review PRs, and automate manual tasks.”
 
 EOF
 
 ###############################################
-# 2. Terraform
+# 2. Azure DevOps
 ###############################################
-cat > "$BASE/Terraform.md" << 'EOF'
-# Terraform – Publicis Sapient Interview Questions
+cat > "$BASE/Azure-DevOps.md" << 'EOF'
+# Azure DevOps (ADO) – Infosys Interview Questions
 
-## Q1. Where do you store your state file?
+## Q1. Tell Azure DevOps features?
 ### Answer
-Store state in a remote backend like Azure Storage, AWS S3, or Terraform Cloud.
+Azure DevOps provides Repos, Pipelines, Boards, Artifacts, Test Plans, and deployment automation.
 ### Follow-Up Points
-- Enable encryption  
-- Turn on soft delete + versioning  
+- Supports YAML pipelines  
+- Integrates with GitHub & Azure services  
 ### Example
-backend "azurerm" { container_name="tfstate" }
+ADO used for CI/CD + Azure deployments via service connections.
 
 ---
 
-## Q2. What is the lifecycle in Terraform?
+## Q2. What is the difference between Azure Repos and Boards?
 ### Answer
-Lifecycle controls resource behavior using arguments like create_before_destroy, prevent_destroy, and ignore_changes.
+Repos store Git code; Boards manage work items, sprints, tasks, and bugs.
 ### Follow-Up Points
-- Avoid downtime  
-- Protect against accidental deletes  
+- Boards = Agile project management  
+- Repos = version control  
 ### Example
-lifecycle { prevent_destroy = true }
+Boards → User Stories; Repos → Code for microservices.
 
 ---
 
-## Q3. Pipeline failed after apply and got stuck in lock state — how do you resolve?
+## Q3. How do you push code to Azure Repos?
 ### Answer
-Manually remove the lock from backend (Azure Storage lease or DynamoDB entry).
+Clone repo → make changes → commit → push.
 ### Follow-Up Points
-- Ensure no other apply is running  
-- Use force-unlock as last option  
+- Use PAT for access if required  
+- Enforce PR policies  
 ### Example
-terraform force-unlock <lock-id>
+git clone <repo-url>  
+git add .  
+git commit -m "update"  
+git push origin main
 
 ---
 
-## Q4. If calling variables from Key Vault but don’t want to mention them in pipeline or code?
+## Q4. What applications/plugins can you use in Azure DevOps?
 ### Answer
-Use Managed Identity + Key Vault references to fetch secrets at runtime.
+Terraform, SonarQube, Docker, Kubernetes, Azure CLI, Key Vault tasks, and marketplace extensions.
 ### Follow-Up Points
-- Avoid plain-text variables  
-- Use EnableSoftDelete for KV  
+- Use installable extensions  
+- Use custom tasks or scripts  
 ### Example
-Terraform → MSI → Key Vault → Secret.
+Terraform task for infra deployment.
+
+---
+
+## Q5. If a new engineer joins your team, how will you give permission in Azure DevOps?
+### Answer
+Add user through Project Settings → Permissions → assign role (Contributor/Reader).
+### Follow-Up Points
+- Use least-privilege  
+- Control repo/pipeline access  
+### Example
+Give read access to prod pipeline; write to dev.
+
+---
+
+## Q6. What level of permission will you give?
+### Answer
+Contributor for day-to-day work, Reader for viewing-only, and limited access to sensitive pipelines.
+### Follow-Up Points
+- Ensure repo protections  
+- Avoid giving admin roles  
+### Example
+Contributor: push code + run pipelines.
+
+---
+
+## Q7. If a user cannot connect to a production server VM, what steps will you take?
+### Answer
+Check NSG rules, VM status, credentials, firewall, network path, and RBAC permissions.
+### Follow-Up Points
+- Check monitoring logs  
+- Validate Bastion/VPN  
+### Example
+az network watcher test-connectivity --source user --dest vm
+
+---
+
+## Q8. What is the flow of CI/CD pipeline with Kubernetes cluster?
+### Answer
+Code → Build → Push Docker image → Deploy to AKS using manifests/Helm → Validation tests.
+### Follow-Up Points
+- Use ACR  
+- Use service connections  
+### Example
+kubectl apply -f deployment.yaml from pipeline.
 
 EOF
 
@@ -195,66 +137,268 @@ EOF
 # 3. CI/CD
 ###############################################
 cat > "$BASE/CI-CD.md" << 'EOF'
-# CI/CD – Publicis Sapient Interview Questions
+# CI/CD Pipeline – Infosys Interview Questions
 
-## Q1. Condition: run pipeline only when dev passes 90%
+## Q1. How do you handle secrets in CI/CD?
 ### Answer
-Use a conditional check in YAML based on code coverage or test results.
+Use secret variables, Key Vault integration, managed identities, and avoid secrets in repo.
 ### Follow-Up Points
-- Use variables from test stage  
-- Use `condition:` in ADO YAML  
+- Mask secrets  
+- Rotate credentials  
 ### Example
-condition: and(succeeded(), eq(variables['coverage'], '90'))
-
-EOF
-
-###############################################
-# 4. Scripting
-###############################################
-cat > "$BASE/Scripting.md" << 'EOF'
-# Scripting – Publicis Sapient Interview Questions
-
-## Q1. Shell script: alert if disk > 80%
-### Answer
-Check disk usage and send email when threshold is crossed.
-### Follow-Up Points
-- Use cron for scheduling  
-- Use mail or sendmail  
-### Example
-#!/bin/bash
-usage=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
-if (( usage > 80 )); then
-  echo "Disk above 80%" | mail -s "Alert" admin@example.com
-fi
-
-EOF
-
-###############################################
-# 5. General
-###############################################
-cat > "$BASE/General.md" << 'EOF'
-# General – Publicis Sapient Interview Questions
-
-## Q1. Introduce yourself.
-### Answer
-Give a short intro including your role, years of experience, cloud stack, DevOps tools, and achievements.
-### Follow-Up Points
-- Keep within 60 seconds  
-- Mention certifications  
-### Example
-“I work with Azure, Terraform, CI/CD, AKS, and automation.”
+AzureKeyVault@2 to fetch secrets at runtime.
 
 ---
 
-## Q2. Tell me about your recent project.
+## Q2. How do you provision infrastructure? (CI/CD)
 ### Answer
-Describe architecture, responsibilities, tools used, challenges, and improvements you delivered.
+Use Terraform tasks in Azure DevOps pipeline with remote backend and service connection authentication.
 ### Follow-Up Points
-- Explain infrastructure workflow  
-- Highlight real scenarios  
+- Use Terraform plan → approval → apply  
+- Separate dev/stage/prod tfvars  
 ### Example
-Terraform → AKS → ACR → Monitoring → CI/CD pipeline.
+Terraform CLI task: init → plan → apply.
+
+---
+
+## Q3. Tell me about your CI/CD deployment process.
+### Answer
+Code commit → PR → Build → Test → Scan → Deploy → Approvals → Release to prod.
+### Follow-Up Points
+- Use multi-stage pipelines  
+- Add quality gates  
+### Example
+Build stage → Deploy to AKS stage → Validation.
 
 EOF
 
-echo "Publicis Sapient – All Markdown Files Created Successfully!"
+###############################################
+# 4. Terraform
+###############################################
+cat > "$BASE/Terraform.md" << 'EOF'
+# Terraform – Infosys Interview Questions
+
+## Q1. How do you provision infrastructure?
+### Answer
+Write Terraform configuration → init → plan → apply using CI/CD pipeline with remote backend.
+### Follow-Up Points
+- Use modules  
+- Separate state per environment  
+### Example
+terraform apply -var-file="prod.tfvars"
+
+---
+
+## Q2. Tell me key features of Terraform?
+### Answer
+Declarative, idempotent, multi-cloud, uses state, modular, and supports dependency graph.
+### Follow-Up Points
+- Plan → predicts changes  
+- Provider ecosystem  
+### Example
+Provision AKS, ACR, VNet in one config.
+
+---
+
+## Q3. Tell me difference between init, plan, apply?
+### Answer
+init → setup provider/plugins  
+plan → preview changes  
+apply → execute changes  
+### Follow-Up Points
+- Apply is irreversible  
+- Plan is safe and read-only  
+### Example
+terraform init → terraform plan → terraform apply
+
+---
+
+## Q4. Why do we use Terraform? Benefits?
+### Answer
+Automates infra creation, ensures consistency, supports versioning, avoids manual errors, and is reusable through modules.
+### Follow-Up Points
+- Infra as code  
+- Environment standardization  
+### Example
+Same module → dev, stage, prod.
+
+EOF
+
+###############################################
+# 5. Azure Cloud Services
+###############################################
+cat > "$BASE/Azure-Cloud.md" << 'EOF'
+# Azure Cloud Services – Infosys Interview Questions
+
+## Q1. Have you worked with Azure Web App Services?
+### Answer
+Yes, App Services are PaaS offerings for hosting web apps and APIs.
+### Follow-Up Points
+- Deployment slots  
+- Auto-scaling  
+### Example
+Deploy using “az webapp deploy”.
+
+---
+
+## Q2. Do you also work with PaaS services?
+### Answer
+Yes — App Services, SQL PaaS, Key Vault, Storage, Event Hub, Functions.
+### Follow-Up Points
+- Highlight managed services  
+### Example
+SQL PaaS → no OS maintenance.
+
+---
+
+## Q3. How do you provision SQL database?
+### Answer
+Use Azure SQL Database via portal, CLI, Terraform, or DevOps pipelines.
+### Follow-Up Points
+- Configure firewall rules  
+- Use private endpoints  
+### Example
+az sql db create --name mydb
+
+---
+
+## Q4. Why SQL PaaS instead of SQL on VM?
+### Answer
+SQL PaaS handles patches, backups, HA, DR, and scaling automatically.
+### Follow-Up Points
+- No OS-level management  
+- More secure  
+### Example
+Automated point-in-time restore.
+
+---
+
+## Q5. If database is deleted, how can we recover it?
+### Answer
+Azure SQL PaaS supports point-in-time restore and backup retention.
+### Follow-Up Points
+- Up to 35 days retention  
+### Example
+Restore from deleted server blade.
+
+---
+
+## Q6. How to connect SQL database with application?
+### Answer
+Use connection strings stored in Key Vault or App Settings.
+### Follow-Up Points
+- Use Managed Identity where possible  
+### Example
+SQL connection string → WebApp settings.
+
+---
+
+## Q7. What Azure services have you worked on?
+### Answer
+VMs, VNets, NSGs, App Services, SQL, Storage, Key Vault, ACR, AKS, Monitor.
+### Follow-Up Points
+- Mention real infra  
+### Example
+AKS + ACR + private endpoints.
+
+EOF
+
+###############################################
+# 6. Kubernetes
+###############################################
+cat > "$BASE/Kubernetes.md" << 'EOF'
+# Kubernetes – Infosys Interview Questions
+
+## Q1. Do you know about replica sets?
+### Answer
+ReplicaSets ensure a fixed number of pod replicas are always running.
+### Follow-Up Points
+- Deployment uses ReplicaSets  
+- Self-healing  
+### Example
+kubectl get rs
+
+---
+
+## Q2. What is the flow of CI/CD with Kubernetes?
+### Answer
+Build → push Docker image → update manifest/Helm → deploy to AKS → health checks.
+### Follow-Up Points
+- Use service connections  
+### Example
+kubectl set image deployment/app app=repo/app:v2
+
+---
+
+## Q3. How do you deploy containers using ADO?
+### Answer
+Build Docker image → Push to ACR → Kubernetes manifest task to deploy.
+### Follow-Up Points
+- Use kubeconfig or service connection  
+### Example
+kubectl apply -f deployment.yaml
+
+---
+
+## Q4. How to enable monitoring in Kubernetes?
+### Answer
+Enable Container Insights or install Prometheus/Grafana.
+### Follow-Up Points
+- Monitor pods, nodes, containers  
+### Example
+az aks enable-addons --addons monitoring
+
+EOF
+
+###############################################
+# 7. Monitoring
+###############################################
+cat > "$BASE/Monitoring.md" << 'EOF'
+# Monitoring – Infosys Interview Questions
+
+## Q1. Tell me about Log Analytics or Application Insights?
+### Answer
+Log Analytics collects logs/metrics in a workspace; App Insights monitors applications with dependencies and performance insights.
+### Follow-Up Points
+- KQL queries  
+- Dashboards + alerts  
+### Example
+Heartbeat | summarize count() by Computer
+
+EOF
+
+###############################################
+# 8. Troubleshooting
+###############################################
+cat > "$BASE/Troubleshooting.md" << 'EOF'
+# Troubleshooting – Infosys Interview Questions
+
+## Q1. A user not able to connect to production VM — what steps to take?
+### Answer
+Check VM power state, NSG rules, firewall, Bastion/VPN access, credentials, and diagnostics logs.
+### Follow-Up Points
+- Check network route  
+- Validate RBAC  
+### Example
+az network watcher test-connectivity
+
+EOF
+
+###############################################
+# 9. Security
+###############################################
+cat > "$BASE/Security.md" << 'EOF'
+# Security / Secrets – Infosys Interview Questions
+
+## Q1. How do you handle secrets in CI/CD?
+### Answer
+Use Key Vault, secret variables, masked logs, and service connections. Never store secrets in repo.
+### Follow-Up Points
+- Use RBAC  
+- Rotate regularly  
+### Example
+AzureKeyVault@2 → fetch at runtime.
+
+EOF
+
+echo "Infosys – All markdown files created successfully!"
