@@ -1,8 +1,3 @@
-Understood — you want a **real enterprise-style migration story**, not a generic textbook answer.
-Below is a **practical narration exactly how companies actually do on-prem → Azure migration for legacy applications**, and it will fit perfectly with your **TD Bank / large enterprise** background.
-
----
-
 ## ⭐ Full realistic answer (enterprise-level wording)
 
 > In my current organization we are migrating multiple legacy on-prem workloads to Azure in a phased manner. These are business-critical applications, so the focus is to avoid downtime and maintain security and compliance.
