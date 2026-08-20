@@ -1,992 +1,940 @@
 {
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "type": "AdaptiveCard",
-    "version": "1.5",
-    "body": [
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Downstream Impact Communication",
+      "weight": "Bolder",
+      "size": "Large",
+      "horizontalAlignment": "Center",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Please complete the information below",
+      "isSubtle": true,
+      "horizontalAlignment": "Center",
+      "spacing": "None",
+      "wrap": true
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
         {
-            "type": "TextBlock",
-            "text": "Downstream Impact Communication",
-            "weight": "Bolder",
-            "size": "Large",
-            "horizontalAlignment": "Center",
-            "wrap": true
-        },
-        {
-            "type": "TextBlock",
-            "text": "Please complete the information below",
-            "isSubtle": true,
-            "horizontalAlignment": "Center",
-            "spacing": "None",
-            "wrap": true
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
                 {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "20",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Incident #",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "incidentNumber",
-                                    "placeholder": "INC123456"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "20",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Incident Status",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "incidentStatus",
-                                    "style": "compact",
-                                    "value": "Active",
-                                    "choices": [
-                                        {
-                                            "title": "Active",
-                                            "value": "Active"
-                                        },
-                                        {
-                                            "title": "Proactive",
-                                            "value": "Proactive"
-                                        },
-                                        {
-                                            "title": "Resolved",
-                                            "value": "Resolved"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "20",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Time of Occurrence / Discovery",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "timeOfOccurrence",
-                                    "placeholder": "2026-08-20 09:45 AM EST"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "20",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Estimated Time to Recovery",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "estimatedRecovery",
-                                    "placeholder": "10:00 AM EST"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "20",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Next Update",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "nextUpdate",
-                                    "placeholder": "09:00 AM EST"
-                                }
-                            ]
-                        }
-                    ]
+                  "type": "TextBlock",
+                  "text": "Incident #",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "incidentNumber",
+                  "placeholder": "INC123456"
                 }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
                 {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "35",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Communication Trigger",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "communicationTrigger",
-                                    "placeholder": "Enter communication trigger / recipients",
-                                    "isMultiline": true
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "65",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Incident Short Description",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "incidentShortDescription",
-                                    "placeholder": "Enter incident short description",
-                                    "isMultiline": true
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
-                {
-                    "type": "TextBlock",
-                    "text": "Impacted Apps / Processes",
-                    "weight": "Bolder",
-                    "size": "Medium",
-                    "wrap": true
+                  "type": "TextBlock",
+                  "text": "Incident Status",
+                  "weight": "Bolder",
+                  "wrap": true
                 },
                 {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "40",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Application",
-                                    "weight": "Bolder"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "60",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Status / Impact",
-                                    "weight": "Bolder"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "impactedRow1",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "40",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "impactedApplication1",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "60",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "impactedStatus1",
-                                    "placeholder": "Status / Impact"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
-                {
-                    "type": "TextBlock",
-                    "text": "Downstream Impacted Application",
-                    "weight": "Bolder",
-                    "size": "Medium",
-                    "wrap": true
-                },
-                {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Application",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Status",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow1",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication1",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus1",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow2",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication2",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus2",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow3",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication3",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus3",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow4",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication4",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus4",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow5",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication5",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus5",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow6",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication6",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus6",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow7",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication7",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus7",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow8",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication8",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus8",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow9",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication9",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus9",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "id": "downstreamRow10",
-                    "isVisible": false,
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "55",
-                            "items": [
-                                {
-                                    "type": "Input.Text",
-                                    "id": "downstreamApplication10",
-                                    "placeholder": "Application"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "45",
-                            "items": [
-                                {
-                                    "type": "Input.ChoiceSet",
-                                    "id": "downstreamStatus10",
-                                    "style": "compact",
-                                    "placeholder": "Select status",
-                                    "choices": [
-                                        {
-                                            "title": "Impacted",
-                                            "value": "Impacted"
-                                        },
-                                        {
-                                            "title": "To be assessed",
-                                            "value": "To be assessed"
-                                        },
-                                        {
-                                            "title": "No Impact",
-                                            "value": "No Impact"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow1",
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow2",
-                                "addRow2"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow2",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow3",
-                                "addRow3"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow3",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow4",
-                                "addRow4"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow4",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow5",
-                                "addRow5"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow5",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow6",
-                                "addRow6"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow6",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow7",
-                                "addRow7"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow7",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow8",
-                                "addRow8"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow8",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow9",
-                                "addRow9"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow9",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.ToggleVisibility",
-                            "title": "+ Add Row",
-                            "targetElements": [
-                                "downstreamRow10",
-                                "addRow10"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ActionSet",
-                    "id": "addRow10",
-                    "isVisible": false,
-                    "spacing": "Small",
-                    "actions": [
-                        {
-                            "type": "Action.Submit",
-                            "title": "Maximum 10 Rows",
-                            "data": {
-                                "action": "maxRows"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
-                {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "35",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Team to Action",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "teamToAction",
-                                    "placeholder": "Enter responsible team"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "65",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "Problem Ticket",
-                                    "weight": "Bolder",
-                                    "wrap": true
-                                },
-                                {
-                                    "type": "Input.Text",
-                                    "id": "problemTicket",
-                                    "placeholder": "PRB123456"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
-                {
-                    "type": "TextBlock",
-                    "text": "Additional Technical Details / Notes",
-                    "weight": "Bolder",
-                    "size": "Medium",
-                    "wrap": true
-                },
-                {
-                    "type": "Input.Text",
-                    "id": "technicalDetails",
-                    "placeholder": "Enter technical details, dependency information, delays, etc.",
-                    "isMultiline": true
-                }
-            ]
-        },
-        {
-            "type": "Container",
-            "style": "emphasis",
-            "spacing": "Medium",
-            "items": [
-                {
-                    "type": "TextBlock",
-                    "text": "Current Update",
-                    "weight": "Bolder",
-                    "size": "Medium",
-                    "wrap": true
-                },
-                {
-                    "type": "Input.Text",
-                    "id": "currentUpdate",
-                    "placeholder": "Enter the latest status/update",
-                    "isMultiline": true
-                }
-            ]
-        },
-        {
-            "type": "ActionSet",
-            "spacing": "Medium",
-            "actions": [
-                {
-                    "type": "Action.Submit",
-                    "title": "Submit",
-                    "style": "positive",
-                    "data": {
-                        "action": "createDownstreamCommunication"
+                  "type": "Input.ChoiceSet",
+                  "id": "incidentStatus",
+                  "style": "compact",
+                  "value": "Active",
+                  "choices": [
+                    {
+                      "title": "Active",
+                      "value": "Active"
+                    },
+                    {
+                      "title": "Proactive",
+                      "value": "Proactive"
+                    },
+                    {
+                      "title": "Resolved",
+                      "value": "Resolved"
                     }
+                  ]
                 }
-            ]
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Time of Occurrence / Discovery",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "timeOfOccurrence",
+                  "placeholder": "2026-08-20 09:45 AM EST"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Estimated Time to Recovery",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "estimatedRecovery",
+                  "placeholder": "10:00 AM EST"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Next Update",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "nextUpdate",
+                  "placeholder": "09:00 AM EST / N/A"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Problem Ticket",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "problemTicket",
+                  "placeholder": "PRB123456"
+                }
+              ]
+            }
+          ]
         }
-    ]
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Communication Trigger",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "Input.Text",
+          "id": "communicationTrigger",
+          "placeholder": "Enter communication trigger / recipients",
+          "isMultiline": true
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Incident Short Description",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "Input.Text",
+          "id": "incidentShortDescription",
+          "placeholder": "Enter incident short description",
+          "isMultiline": true
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Impacted Apps / Processes",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+
+        {
+          "type": "ColumnSet",
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Application",
+                  "weight": "Bolder",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Status",
+                  "weight": "Bolder",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "impactedRow1",
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedApplication1",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedStatus1",
+                  "placeholder": "Status"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "impactedRow2",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedApplication2",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedStatus2",
+                  "placeholder": "Status"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "impactedRow3",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedApplication3",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedStatus3",
+                  "placeholder": "Status"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "impactedRow4",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedApplication4",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedStatus4",
+                  "placeholder": "Status"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "impactedRow5",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedApplication5",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "impactedStatus5",
+                  "placeholder": "Status"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "impactedAdd1",
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow2",
+                "impactedAdd1",
+                "impactedAdd2"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "impactedAdd2",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow3",
+                "impactedAdd2",
+                "impactedAdd3"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "impactedAdd3",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow4",
+                "impactedAdd3",
+                "impactedAdd4"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "impactedAdd4",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow5",
+                "impactedAdd4",
+                "impactedAdd5"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "impactedAdd5",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Maximum 5 Rows",
+              "data": {
+                "action": "maxImpactedRows"
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Downstream Impacted Application",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+
+        {
+          "type": "ColumnSet",
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Application",
+                  "weight": "Bolder",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Status",
+                  "weight": "Bolder",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "downstreamRow1",
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "downstreamApplication1",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "downstreamStatus1",
+                  "style": "compact",
+                  "placeholder": "Select status",
+                  "choices": [
+                    {
+                      "title": "Impacted",
+                      "value": "Impacted"
+                    },
+                    {
+                      "title": "To be assessed",
+                      "value": "To be assessed"
+                    },
+                    {
+                      "title": "No Impact",
+                      "value": "No Impact"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "downstreamRow2",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "downstreamApplication2",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "downstreamStatus2",
+                  "style": "compact",
+                  "placeholder": "Select status",
+                  "choices": [
+                    {
+                      "title": "Impacted",
+                      "value": "Impacted"
+                    },
+                    {
+                      "title": "To be assessed",
+                      "value": "To be assessed"
+                    },
+                    {
+                      "title": "No Impact",
+                      "value": "No Impact"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "downstreamRow3",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "downstreamApplication3",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "downstreamStatus3",
+                  "style": "compact",
+                  "placeholder": "Select status",
+                  "choices": [
+                    {
+                      "title": "Impacted",
+                      "value": "Impacted"
+                    },
+                    {
+                      "title": "To be assessed",
+                      "value": "To be assessed"
+                    },
+                    {
+                      "title": "No Impact",
+                      "value": "No Impact"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "downstreamRow4",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "downstreamApplication4",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "downstreamStatus4",
+                  "style": "compact",
+                  "placeholder": "Select status",
+                  "choices": [
+                    {
+                      "title": "Impacted",
+                      "value": "Impacted"
+                    },
+                    {
+                      "title": "To be assessed",
+                      "value": "To be assessed"
+                    },
+                    {
+                      "title": "No Impact",
+                      "value": "No Impact"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ColumnSet",
+          "id": "downstreamRow5",
+          "isVisible": false,
+          "spacing": "Small",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "55",
+              "items": [
+                {
+                  "type": "Input.Text",
+                  "id": "downstreamApplication5",
+                  "placeholder": "Application"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "45",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "downstreamStatus5",
+                  "style": "compact",
+                  "placeholder": "Select status",
+                  "choices": [
+                    {
+                      "title": "Impacted",
+                      "value": "Impacted"
+                    },
+                    {
+                      "title": "To be assessed",
+                      "value": "To be assessed"
+                    },
+                    {
+                      "title": "No Impact",
+                      "value": "No Impact"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "downstreamAdd1",
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow2",
+                "downstreamAdd1",
+                "downstreamAdd2"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "downstreamAdd2",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow3",
+                "downstreamAdd2",
+                "downstreamAdd3"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "downstreamAdd3",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow4",
+                "downstreamAdd3",
+                "downstreamAdd4"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "downstreamAdd4",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow5",
+                "downstreamAdd4",
+                "downstreamAdd5"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "ActionSet",
+          "id": "downstreamAdd5",
+          "isVisible": false,
+          "spacing": "Small",
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Maximum 5 Rows",
+              "data": {
+                "action": "maxDownstreamRows"
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Team to Action",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "teamToAction",
+                  "placeholder": "Enter responsible team"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "50",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Current Update",
+                  "weight": "Bolder",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "currentUpdate",
+                  "placeholder": "Enter current update",
+                  "isMultiline": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Additional Technical Details / Notes",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "Input.Text",
+          "id": "technicalDetails",
+          "placeholder": "Enter technical details, dependency information, delays, etc.",
+          "isMultiline": true
+        }
+      ]
+    },
+
+    {
+      "type": "ActionSet",
+      "spacing": "Medium",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "style": "positive",
+          "data": {
+            "action": "createDownstreamCommunication"
+          }
+        }
+      ]
+    }
+  ]
 }
