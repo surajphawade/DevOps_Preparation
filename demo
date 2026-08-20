@@ -19,7 +19,6 @@
       "spacing": "None",
       "wrap": true
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -40,9 +39,7 @@
                 {
                   "type": "Input.Text",
                   "id": "incidentNumber",
-                  "placeholder": "INC123456",
-                  "isRequired": true,
-                  "errorMessage": "Incident number is required."
+                  "placeholder": "INC123456"
                 }
               ]
             },
@@ -159,7 +156,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -172,46 +168,22 @@
           "size": "Medium"
         },
         {
-          "type": "ColumnSet",
-          "columns": [
+          "type": "Input.ChoiceSet",
+          "id": "communicationTrigger",
+          "style": "expanded",
+          "choices": [
             {
-              "type": "Column",
-              "width": "50",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "communicationTrigger",
-                  "style": "compact",
-                  "placeholder": "Select trigger",
-                  "choices": [
-                    {
-                      "title": "Initial Communication",
-                      "value": "Initial Communication"
-                    },
-                    {
-                      "title": "Status Update",
-                      "value": "Status Update"
-                    }
-                  ]
-                }
-              ]
+              "title": "Downstream Application Impact",
+              "value": "Downstream Application Impact"
             },
             {
-              "type": "Column",
-              "width": "50",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "communicationRecipients",
-                  "placeholder": "Recipients"
-                }
-              ]
+              "title": "File / Data Delay",
+              "value": "File / Data Delay"
             }
           ]
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -226,11 +198,11 @@
         {
           "type": "Input.Text",
           "id": "incidentShortDescription",
-          "placeholder": "Enter incident short description"
+          "placeholder": "Enter incident short description",
+          "isMultiline": true
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -240,12 +212,10 @@
           "type": "TextBlock",
           "text": "Impacted Apps / Processes",
           "weight": "Bolder",
-          "size": "Medium",
-          "wrap": true
+          "size": "Medium"
         },
         {
           "type": "ColumnSet",
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
@@ -274,16 +244,17 @@
         {
           "type": "ColumnSet",
           "id": "impactedRow1",
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "impactedApplication1",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -294,7 +265,7 @@
                 {
                   "type": "Input.Text",
                   "id": "impactedStatus1",
-                  "placeholder": "Status"
+                  "placeholder": "Enter Status"
                 }
               ]
             }
@@ -304,16 +275,17 @@
           "type": "ColumnSet",
           "id": "impactedRow2",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "impactedApplication2",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -324,7 +296,7 @@
                 {
                   "type": "Input.Text",
                   "id": "impactedStatus2",
-                  "placeholder": "Status"
+                  "placeholder": "Enter Status"
                 }
               ]
             }
@@ -334,16 +306,17 @@
           "type": "ColumnSet",
           "id": "impactedRow3",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "impactedApplication3",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -354,7 +327,7 @@
                 {
                   "type": "Input.Text",
                   "id": "impactedStatus3",
-                  "placeholder": "Status"
+                  "placeholder": "Enter Status"
                 }
               ]
             }
@@ -364,16 +337,17 @@
           "type": "ColumnSet",
           "id": "impactedRow4",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "impactedApplication4",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -384,7 +358,7 @@
                 {
                   "type": "Input.Text",
                   "id": "impactedStatus4",
-                  "placeholder": "Status"
+                  "placeholder": "Enter Status"
                 }
               ]
             }
@@ -394,16 +368,17 @@
           "type": "ColumnSet",
           "id": "impactedRow5",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "impactedApplication5",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -414,157 +389,7 @@
                 {
                   "type": "Input.Text",
                   "id": "impactedStatus5",
-                  "placeholder": "Status"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "impactedRow6",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedApplication6",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedStatus6",
-                  "placeholder": "Status"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "impactedRow7",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedApplication7",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedStatus7",
-                  "placeholder": "Status"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "impactedRow8",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedApplication8",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedStatus8",
-                  "placeholder": "Status"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "impactedRow9",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedApplication9",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedStatus9",
-                  "placeholder": "Status"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "impactedRow10",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedApplication10",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "impactedStatus10",
-                  "placeholder": "Status"
+                  "placeholder": "Enter Status"
                 }
               ]
             }
@@ -572,27 +397,65 @@
         },
         {
           "type": "ActionSet",
-          "spacing": "Small",
+          "id": "impactedAddButton1",
           "actions": [
             {
               "type": "Action.ToggleVisibility",
               "title": "+ Add Row",
               "targetElements": [
-                "impactedRow2"
+                "impactedRow2",
+                "impactedAddButton1"
               ]
             }
           ]
         },
         {
-          "type": "TextBlock",
-          "text": "Add up to 10 impacted applications.",
-          "isSubtle": true,
-          "size": "Small",
-          "spacing": "Small"
+          "type": "ActionSet",
+          "id": "impactedAddButton2",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow3",
+                "impactedAddButton2"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "id": "impactedAddButton3",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow4",
+                "impactedAddButton3"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "id": "impactedAddButton4",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "impactedRow5",
+                "impactedAddButton4"
+              ]
+            }
+          ]
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -600,14 +463,12 @@
       "items": [
         {
           "type": "TextBlock",
-          "text": "Downstream Impacted Applications",
+          "text": "Downstream Impacted Application",
           "weight": "Bolder",
-          "size": "Medium",
-          "wrap": true
+          "size": "Medium"
         },
         {
           "type": "ColumnSet",
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
@@ -636,16 +497,17 @@
         {
           "type": "ColumnSet",
           "id": "downstreamRow1",
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "downstreamApplication1",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -657,7 +519,7 @@
                   "type": "Input.ChoiceSet",
                   "id": "downstreamStatus1",
                   "style": "compact",
-                  "placeholder": "Select status",
+                  "placeholder": "Select Status",
                   "choices": [
                     {
                       "title": "Impacted",
@@ -681,16 +543,17 @@
           "type": "ColumnSet",
           "id": "downstreamRow2",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "downstreamApplication2",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -702,6 +565,7 @@
                   "type": "Input.ChoiceSet",
                   "id": "downstreamStatus2",
                   "style": "compact",
+                  "placeholder": "Select Status",
                   "choices": [
                     {
                       "title": "Impacted",
@@ -725,16 +589,17 @@
           "type": "ColumnSet",
           "id": "downstreamRow3",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "downstreamApplication3",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -746,6 +611,7 @@
                   "type": "Input.ChoiceSet",
                   "id": "downstreamStatus3",
                   "style": "compact",
+                  "placeholder": "Select Status",
                   "choices": [
                     {
                       "title": "Impacted",
@@ -769,16 +635,17 @@
           "type": "ColumnSet",
           "id": "downstreamRow4",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "downstreamApplication4",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -790,6 +657,7 @@
                   "type": "Input.ChoiceSet",
                   "id": "downstreamStatus4",
                   "style": "compact",
+                  "placeholder": "Select Status",
                   "choices": [
                     {
                       "title": "Impacted",
@@ -813,16 +681,17 @@
           "type": "ColumnSet",
           "id": "downstreamRow5",
           "isVisible": false,
-          "spacing": "Small",
           "columns": [
             {
               "type": "Column",
               "width": "55",
               "items": [
                 {
-                  "type": "Input.Text",
+                  "type": "Input.ChoiceSet",
                   "id": "downstreamApplication5",
-                  "placeholder": "Application"
+                  "style": "compact",
+                  "placeholder": "Select Application",
+                  "choices": "@{outputs('Compose_ApplicationChoices')}"
                 }
               ]
             },
@@ -834,226 +703,7 @@
                   "type": "Input.ChoiceSet",
                   "id": "downstreamStatus5",
                   "style": "compact",
-                  "choices": [
-                    {
-                      "title": "Impacted",
-                      "value": "Impacted"
-                    },
-                    {
-                      "title": "To be assessed",
-                      "value": "To be assessed"
-                    },
-                    {
-                      "title": "No Impact",
-                      "value": "No Impact"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "downstreamRow6",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "downstreamApplication6",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "downstreamStatus6",
-                  "style": "compact",
-                  "choices": [
-                    {
-                      "title": "Impacted",
-                      "value": "Impacted"
-                    },
-                    {
-                      "title": "To be assessed",
-                      "value": "To be assessed"
-                    },
-                    {
-                      "title": "No Impact",
-                      "value": "No Impact"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "downstreamRow7",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "downstreamApplication7",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "downstreamStatus7",
-                  "style": "compact",
-                  "choices": [
-                    {
-                      "title": "Impacted",
-                      "value": "Impacted"
-                    },
-                    {
-                      "title": "To be assessed",
-                      "value": "To be assessed"
-                    },
-                    {
-                      "title": "No Impact",
-                      "value": "No Impact"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "downstreamRow8",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "downstreamApplication8",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "downstreamStatus8",
-                  "style": "compact",
-                  "choices": [
-                    {
-                      "title": "Impacted",
-                      "value": "Impacted"
-                    },
-                    {
-                      "title": "To be assessed",
-                      "value": "To be assessed"
-                    },
-                    {
-                      "title": "No Impact",
-                      "value": "No Impact"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "downstreamRow9",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "downstreamApplication9",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "downstreamStatus9",
-                  "style": "compact",
-                  "choices": [
-                    {
-                      "title": "Impacted",
-                      "value": "Impacted"
-                    },
-                    {
-                      "title": "To be assessed",
-                      "value": "To be assessed"
-                    },
-                    {
-                      "title": "No Impact",
-                      "value": "No Impact"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "id": "downstreamRow10",
-          "isVisible": false,
-          "spacing": "Small",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "55",
-              "items": [
-                {
-                  "type": "Input.Text",
-                  "id": "downstreamApplication10",
-                  "placeholder": "Application"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "45",
-              "items": [
-                {
-                  "type": "Input.ChoiceSet",
-                  "id": "downstreamStatus10",
-                  "style": "compact",
+                  "placeholder": "Select Status",
                   "choices": [
                     {
                       "title": "Impacted",
@@ -1075,20 +725,65 @@
         },
         {
           "type": "ActionSet",
-          "spacing": "Small",
+          "id": "downstreamAddButton1",
           "actions": [
             {
               "type": "Action.ToggleVisibility",
               "title": "+ Add Row",
               "targetElements": [
-                "downstreamRow2"
+                "downstreamRow2",
+                "downstreamAddButton1"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "id": "downstreamAddButton2",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow3",
+                "downstreamAddButton2"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "id": "downstreamAddButton3",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow4",
+                "downstreamAddButton3"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "id": "downstreamAddButton4",
+          "isVisible": false,
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "+ Add Row",
+              "targetElements": [
+                "downstreamRow5",
+                "downstreamAddButton4"
               ]
             }
           ]
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -1134,7 +829,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -1153,16 +847,20 @@
           "isMultiline": true
         }
       ]
-    }
-  ],
-  "actions": [
+    },
     {
-      "type": "Action.Submit",
-      "title": "Submit Communication",
-      "style": "positive",
-      "data": {
-        "action": "submitCommunication"
-      }
+      "type": "ActionSet",
+      "spacing": "Medium",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "style": "positive",
+          "data": {
+            "action": "createDownstreamCommunication"
+          }
+        }
+      ]
     }
   ]
 }
