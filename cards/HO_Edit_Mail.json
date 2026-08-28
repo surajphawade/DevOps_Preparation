@@ -1,0 +1,62 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "📧 Update Mail",
+      "size": "Large",
+      "weight": "Bolder",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "id",
+      "label": "Mail ID",
+      "placeholder": "Example: M001"
+    },
+    {
+      "type": "Input.Text",
+      "id": "subject",
+      "label": "Subject",
+      "maxLength": 250
+    },
+    {
+      "type": "Input.Text",
+      "id": "description",
+      "label": "Follow-up / Details",
+      "isMultiline": true,
+      "maxLength": 1500
+    },
+    {
+      "type": "Input.Text",
+      "id": "owner",
+      "label": "Owner"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "status",
+      "label": "Status",
+      "choices": [
+        {
+          "title": "Open",
+          "value": "Open"
+        },
+        {
+          "title": "Closed",
+          "value": "Closed"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "💾 Save Mail",
+      "data": {
+        "action": "saveMail"
+      }
+    }
+  ]
+}
