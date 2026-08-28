@@ -236,3 +236,281 @@ Adaptive Card:
 Lekin abhi ye paste karke run mat karna.
 
 Pehle Priority Select/Compose test karenge. Agar woh clean aa raha hai, phir RITM/Mail/ETL add kareng
+
+
+
+----------------------------------------
+
+
+2. Select Priority
+
+Add:
+
+Data Operations → Select
+
+Rename:
+
+Select_Priority
+From
+
+Expression:
+
+body('ReadPriority')?['value']
+Map
+
+Left side:
+
+text
+
+Right side:
+
+item()?['Priority']
+
+Agar tumhare Priority table mein actual column ka naam PriorityUpdate hai, then:
+
+item()?['PriorityUpdate']
+3. Compose Priority
+
+Add Compose.
+
+Rename:
+
+Compose_Priority
+
+Expression:
+
+join(
+  body('Select_Priority'),
+  decodeUriComponent('%0A')
+)
+
+⚠️ But Select ka output object array hai, so better version use karo:
+
+Select_Priority ko direct string output do
+
+Select mapping:
+
+text
+
+Value:
+
+item()?['Priority']
+
+Then Compose_Priority:
+
+join(
+  select(body('ReadPriority')?['value'], item()?['Priority']),
+  decodeUriComponent('%0A')
+)
+
+Agar Power Automate editor select() accept nahi karta, then hum Select + Compose cleaning method use karenge.
+
+4. ETL — tumhare screenshot ke according exact
+
+Tumhara table:
+
+tblETL
+
+Columns:
+
+Group
+ETLUpdate
+Select ETL
+
+Rename:
+
+Select_ETL
+
+From:
+
+body('ReadETL')?['value']
+
+Map:
+
+Left:
+
+text
+
+Right:
+
+concat(
+  '• ',
+  item()?['Group'],
+  ' – ',
+  item()?['ETLUpdate']
+)
+
+Isse output:
+
+[
+  {
+    "text": "• Group 1 – WDORG - 02/03 Jobs Completed..."
+  },
+  {
+    "text": "• Group 2 – Salesforce - 33/34 Jobs Completed..."
+  },
+  {
+    "text": "• Group 3 – FBT - Please Monitor"
+  }
+]
+5. Compose ETL
+
+Rename:
+
+Compose_ETL
+
+Input:
+
+string(body('Select_ETL'))
+6. Clean ETL
+
+Ab Compose_ETL ke baad ek aur Compose.
+
+Rename:
+
+Clean_ETL
+
+Expression:
+
+replace(
+  replace(
+    replace(
+      replace(
+        outputs('Compose_ETL'),
+        '[{"text":"',
+        ''
+      ),
+      '"},{"text":"',
+      decodeUriComponent('%0A')
+    ),
+    '"}]',
+    ''
+  ),
+  '","text":"',
+  decodeUriComponent('%0A')
+)
+Result
+
+Raw:
+
+[{"text":"• Group 1 – WDORG..."},
+{"text":"• Group 2 – Salesforce..."},
+{"text":"• Group 3 – FBT..."}]
+
+becomes:
+
+• Group 1 – WDORG...
+• Group 2 – Salesforce...
+• Group 3 – FBT...
+7. Same pattern RITM
+
+Assuming RITM table has column:
+
+RITMUpdate
+Select_RITM
+
+From:
+
+body('ReadRITM')?['value']
+
+Map:
+
+text
+
+Value:
+
+concat(
+  '• ',
+  item()?['RITMUpdate']
+)
+Compose_RITM
+string(body('Select_RITM'))
+Clean_RITM
+replace(
+  replace(
+    replace(
+      outputs('Compose_RITM'),
+      '[{"text":"',
+      ''
+    ),
+    '"},{"text":"',
+    decodeUriComponent('%0A')
+  ),
+  '"}]',
+  ''
+)
+8. Same pattern Mail
+
+Assuming Mail table column:
+
+MailUpdate
+Select_Mail
+
+From:
+
+body('ReadMail')?['value']
+
+Map:
+
+text
+
+Value:
+
+concat(
+  '• ',
+  item()?['MailUpdate']
+)
+Compose_Mail
+string(body('Select_Mail'))
+Clean_Mail
+replace(
+  replace(
+    replace(
+      outputs('Compose_Mail'),
+      '[{"text":"',
+      ''
+    ),
+    '"},{"text":"',
+    decodeUriComponent('%0A')
+  ),
+  '"}]',
+  ''
+)
+9. Priority same way
+
+Assuming column:
+
+PriorityUpdate
+Select_Priority
+
+From:
+
+body('ReadPriority')?['value']
+
+Map:
+
+text
+
+Value:
+
+concat(
+  '• ',
+  item()?['PriorityUpdate']
+)
+Compose_Priority
+string(body('Select_Priority'))
+Clean_Priority
+replace(
+  replace(
+    replace(
+      outputs('Compose_Priority'),
+      '[{"text":"',
+      ''
+    ),
+    '"},{"text":"',
+    decodeUriComponent('%0A')
+  ),
+  '"}]',
+  ''
+)
+10. Final Flow Structure
