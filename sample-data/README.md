@@ -1,3 +1,12 @@
-# Sample data
-
-Use these values only for testing. Do not copy production/customer information into a public repository.
+concat(
+'• ',
+item()?['Title'],
+' | ',
+item()?['Description'],
+' | Owner: ',
+item()?['Owner'],
+' | ',
+item()?['Priority'],
+' | ',
+item()?['Status']
+)
