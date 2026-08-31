@@ -1,0 +1,11 @@
+json(
+  concat(
+    '{',
+    '"SavedAt":"', utcNow(), '",',
+    '"Priority":', string(outputs('ReadPriority')?['body/value']), ',',
+    '"RITM":', string(outputs('ReadRITM')?['body/value']), ',',
+    '"Mail":', string(outputs('ReadMail')?['body/value']), ',',
+    '"ETL":', string(outputs('ReadETL')?['body/value']),
+    '}'
+  )
+)
