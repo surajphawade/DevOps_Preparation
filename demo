@@ -1,11 +1,1 @@
-json(
-  concat(
-    '{',
-    '"SavedAt":"', utcNow(), '",',
-    '"Priority":', string(outputs('ReadPriority')?['body/value']), ',',
-    '"RITM":', string(outputs('ReadRITM')?['body/value']), ',',
-    '"Mail":', string(outputs('ReadMail')?['body/value']), ',',
-    '"ETL":', string(outputs('ReadETL')?['body/value']),
-    '}'
-  )
-)
+string(json(concat('{"ID":"',items('Apply_to_each_2')?['ID'],'","Title":"',items('Apply_to_each_2')?['Title'],'","Description":"',items('Apply_to_each_2')?['Description'],'","Owner":"',items('Apply_to_each_2')?['Owner'],'","Priority":"',items('Apply_to_each_2')?['Priority'],'","Status":"',items('Apply_to_each_2')?['Status'],'"}')))
