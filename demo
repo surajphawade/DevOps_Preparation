@@ -1,1 +1,42 @@
-string(json(concat('{"ID":"',items('Apply_to_each_2')?['ID'],'","Title":"',items('Apply_to_each_2')?['Title'],'","Description":"',items('Apply_to_each_2')?['Description'],'","Owner":"',items('Apply_to_each_2')?['Owner'],'","Priority":"',items('Apply_to_each_2')?['Priority'],'","Status":"',items('Apply_to_each_2')?['Status'],'"}')))
+
+### 1. Compose — ID
+
+Expression:
+
+```text
+trim(first(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|')))
+```
+
+### 2. Compose — Title
+
+```text
+trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),1)))
+```
+
+### 3. Compose — Description
+
+```text
+trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),2)))
+```
+
+### 4. Compose — Owner
+
+```text
+trim(replace(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),3)),'Owner:',''))
+```
+
+### 5. Compose — Priority
+
+```text
+trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),4)))
+```
+
+### 6. Compose — Status
+
+```text
+trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),5)))
+```
+
+**Important:** Agar tumhare action ka actual naam `Post adaptive card and wait for a response` alag hai, expression mein `Post_adaptive_card_and_wait_for_a_response` ki jagah **apne action ka exact internal name** use karna.
+
+Uske baad **UpdatePriority mein in 6 Compose outputs map karenge.**
