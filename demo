@@ -378,3 +378,824 @@
     }
   ]
 }
+
+
+------------------------------
+
+
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+
+  "body": [
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "HANDOVER",
+                  "size": "ExtraLarge",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Operations Shift Summary",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "verticalContentAlignment": "Center",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "HO",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "horizontalAlignment": "Center"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "style": "good",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "📅",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "REPORTING DATE",
+                  "size": "Small",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${ReportingDate}",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "TextBlock",
+      "text": "CURRENT HANDOVER",
+      "size": "Small",
+      "weight": "Bolder",
+      "isSubtle": true,
+      "spacing": "Large"
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🔴",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "SHOW STOPPER",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "High Priority Items • Upcoming Critical CHGs",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "wrap": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${ShowStopperDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🟠",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "PRBs",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Linked with Current Day Incidents",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${PRBDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🔵",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "RITM",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Request Items",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${RITMDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🟡",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "PROBLEMS",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Problem Management",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${ProblemsDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🟣",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "CTASKS",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Change / Task Activities",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${CTASKDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "⚫",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "GTSOPS TICKETS",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "GTSOPS Operational Tickets",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${GTSOPSDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🔴",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "CRITICAL MALCODES",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Critical Production Malcodes",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${CriticalMalcodesDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🟣",
+                  "size": "Medium",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "NON-CRITICAL MALCODES",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Non-Critical Production Malcodes",
+                  "size": "Small",
+                  "isSubtle": true,
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "Container",
+          "spacing": "Small",
+          "separator": true,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${NonCriticalMalcodesDetails}",
+              "wrap": true,
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "APPLICATION GROUPS",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 1",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group1Details}",
+          "wrap": true,
+          "separator": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 2",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group2Details}",
+          "wrap": true,
+          "separator": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 3",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group3Details}",
+          "wrap": true,
+          "separator": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 4",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group4Details}",
+          "wrap": true,
+          "separator": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 5",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group5Details}",
+          "wrap": true,
+          "separator": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "DATA & PROCESSING",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟣  INGESTION",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${IngestionDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔵  ETL",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ETLDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟢  SYNAPSE",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${SynapseDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚫  OTHER",
+          "size": "Medium",
+          "weight": "Bolder",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${OtherDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    }
+
+  ]
+}
