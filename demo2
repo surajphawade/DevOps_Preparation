@@ -1,0 +1,739 @@
+Yes bro. Now we are at exactly the right point. I can see your existing **SheetLock Bot → Switch → Case: HO** flow.
+
+Since your Excel side is already working, we will make `/HO` simply **read the `HO_Automation` table and display the current HO in a beautiful Adaptive Card**.
+
+### Our flow will be
+
+```text
+Get message details
+        ↓
+Html to text
+        ↓
+Full message
+        ↓
+Command
+        ↓
+Switch
+        ↓
+Case: HO
+        ↓
+List rows present in HO_Automation
+        ↓
+Prepare each HO section
+        ↓
+Adaptive Card
+        ↓
+Post card to Teams
+```
+
+Your automation Excel should be:
+
+**Sheet:** `HO_Automation`
+
+**Table:** `HO_Automation`
+
+| Section                                                     | Details    |
+| ----------------------------------------------------------- | ---------- |
+| Reporting Date                                              | 1-Sep-2026 |
+| Show Stopper / High Priority Items / Upcoming Critical CHGs | ...        |
+| PRBs Linked with Current Day Incidents                      | ...        |
+| RITM                                                        | ...        |
+| Problems                                                    | ...        |
+| CTASKS                                                      | ...        |
+| GTSOPS Tickets                                              | ...        |
+| Critical Malcodes                                           | ...        |
+| Non Critical Malcodes                                       | ...        |
+| Group 1                                                     | ...        |
+| Group 2                                                     | ...        |
+| Group 3                                                     | ...        |
+| Group 4                                                     | ...        |
+| Group 5                                                     | ...        |
+| Ingestion                                                   | ...        |
+| ETL                                                         | ...        |
+| Synapse                                                     | ...        |
+| Other                                                       | ...        |
+
+---
+
+# STEP 1 — Inside `Case: HO`
+
+Click the **+** inside your `Case: HO`.
+
+Add:
+
+### Excel Online (Business)
+
+**List rows present in a table**
+
+Configure:
+
+**Location:** Your SharePoint site
+**Document Library:** your library
+**File:** your HO workbook
+**Table:** `HO_Automation`
+
+This is the only Excel action we need for reading the HO.
+
+---
+
+# STEP 2 — Add `Filter array`
+
+We need to find the Reporting Date row.
+
+Add:
+
+**Data Operations → Filter array**
+
+### From
+
+```text
+value
+```
+
+from **List rows present in a table**.
+
+### Condition
+
+Left side:
+
+```text
+item()?['Section']
+```
+
+Operator:
+
+```text
+is equal to
+```
+
+Right side:
+
+```text
+Reporting Date
+```
+
+Rename this action:
+
+```text
+Filter - Reporting Date
+```
+
+---
+
+# STEP 3 — Compose Reporting Date
+
+Add **Compose**.
+
+Rename:
+
+```text
+ReportingDate
+```
+
+Expression:
+
+```text
+first(body('Filter_-_Reporting_Date'))?['Details']
+```
+
+---
+
+# STEP 4 — Do the same for the HO sections
+
+We can make this very clean.
+
+For example:
+
+### Filter - Show Stopper
+
+```text
+item()?['Section']
+```
+
+equals
+
+```text
+Show Stopper / High Priority Items / Upcoming Critical CHGs
+```
+
+Then Compose:
+
+```text
+ShowStopperDetails
+```
+
+Expression:
+
+```text
+first(body('Filter_-_Show_Stopper'))?['Details']
+```
+
+---
+
+### Filter - PRB
+
+Section:
+
+```text
+PRBs Linked with Current Day Incidents
+```
+
+Compose:
+
+```text
+PRBDetails
+```
+
+Expression:
+
+```text
+first(body('Filter_-_PRB'))?['Details']
+```
+
+---
+
+### Filter - RITM
+
+Section:
+
+```text
+RITM
+```
+
+Compose:
+
+```text
+RITMDetails
+```
+
+Expression:
+
+```text
+first(body('Filter_-_RITM'))?['Details']
+```
+
+---
+
+Then same pattern:
+
+| Section               | Compose                      |
+| --------------------- | ---------------------------- |
+| Problems              | `ProblemsDetails`            |
+| CTASKS                | `CTASKDetails`               |
+| GTSOPS Tickets        | `GTSOPSDetails`              |
+| Critical Malcodes     | `CriticalMalcodesDetails`    |
+| Non Critical Malcodes | `NonCriticalMalcodesDetails` |
+| Group 1               | `Group1Details`              |
+| Group 2               | `Group2Details`              |
+| Group 3               | `Group3Details`              |
+| Group 4               | `Group4Details`              |
+| Group 5               | `Group5Details`              |
+| Ingestion             | `IngestionDetails`           |
+| ETL                   | `ETLDetails`                 |
+| Synapse               | `SynapseDetails`             |
+| Other                 | `OtherDetails`               |
+
+So essentially:
+
+```text
+List rows
+   ↓
+Filter Reporting Date → Compose ReportingDate
+   ↓
+Filter Show Stopper → Compose ShowStopperDetails
+   ↓
+Filter PRB → Compose PRBDetails
+   ↓
+Filter RITM → Compose RITMDetails
+   ↓
+...
+```
+
+**Important:** We are NOT splitting the Details cell.
+
+If RITM contains 10 lines in one Excel cell, we take that **entire cell** and display it as one section.
+
+---
+
+# STEP 5 — Adaptive Card
+
+After all the Compose actions:
+
+Add:
+
+**Microsoft Teams → Post adaptive card in a chat or channel**
+
+For now select your existing HO group/chat configuration.
+
+Use this card.
+
+```json
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "HANDOVER UPDATE",
+          "size": "Large",
+          "weight": "Bolder",
+          "color": "Accent",
+          "spacing": "None"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Current production handover status",
+          "size": "Small",
+          "isSubtle": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "REPORTING DATE",
+                  "size": "Small",
+                  "weight": "Bolder",
+                  "color": "Default"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${ReportingDate}",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "color": "Accent",
+                  "horizontalAlignment": "Right"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔴  SHOW STOPPER / HIGH PRIORITY / CRITICAL CHGs",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ShowStopperDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟠  PRBs LINKED WITH CURRENT DAY INCIDENTS",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "${PRBDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔵  RITM",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${RITMDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟡  PROBLEMS",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ProblemsDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟣  CTASKS",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${CTASKDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚫  GTSOPS TICKETS",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${GTSOPSDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔴  CRITICAL MALCODES",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${CriticalMalcodesDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟣  NON CRITICAL MALCODES",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${NonCriticalMalcodesDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 1",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group1Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 2",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group2Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 3",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group3Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 4",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group4Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥  GROUP 5",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group5Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟣  INGESTION",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${IngestionDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔵  ETL",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ETLDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟢  SYNAPSE",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${SynapseDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "separator": true,
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚫  OTHER",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${OtherDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### One important thing
+
+In Power Automate, don't literally leave:
+
+```text
+${ReportingDate}
+```
+
+etc. in the final card.
+
+We will insert the **Outputs** of the corresponding Compose actions using dynamic content.
+
+For example:
+
+```text
+${ReportingDate}
+```
+
+→ select **Outputs** from `ReportingDate`.
+
+Same for:
+
+```text
+${RITMDetails}
+```
+
+→ **Outputs** from `RITMDetails`.
+
+---
+
+## What we get
+
+When someone types:
+
+```text
+/HO
+```
+
+the bot will respond with something like:
+
+```text
+┌─────────────────────────────────────┐
+│ HANDOVER UPDATE                     │
+│ Current production handover status  │
+│                                     │
+│ REPORTING DATE              01-Sep │
+├─────────────────────────────────────┤
+│ 🔴 SHOW STOPPER / HIGH PRIORITY     │
+│ PRB015455 - OCCW                    │
+│ ...                                 │
+├─────────────────────────────────────┤
+│ 🟠 PRBs LINKED WITH CURRENT DAY     │
+│ 3AT20.01 | FIC | ...                │
+├─────────────────────────────────────┤
+│ 🔵 RITM                             │
+│ RITM1878290 - Please work on this   │
+│ RITM1873466 - Please work on this   │
+│ ...                                 │
+├─────────────────────────────────────┤
+│ 🟡 PROBLEMS                         │
+│ ...                                 │
+├─────────────────────────────────────┤
+│ 🟣 CTASKS                           │
+│ ...                                 │
+└─────────────────────────────────────┘
+```
+
+And the **big advantage** is:
+
+**User updates original HO sheet → formulas update `HO_Automation` → `/HO` reads `HO_Automation` → Teams always shows latest HO.**
+
+No Power Automate is involved in the Excel update itself. Power Automate only **reads the prepared table**.
+
+**Next, I would not build all 18 filters at once.** Let's first make **List rows → Reporting Date filter → Compose ReportingDate → Adaptive Card with just Reporting Date**, run `/HO`, and confirm that the data is coming correctly. Then we can add the remaining sections safely.
