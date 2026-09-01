@@ -1,42 +1,380 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "HANDOVER UPDATE",
+          "weight": "Bolder",
+          "size": "Large"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Current HO Information",
+          "size": "Small",
+          "isSubtle": true,
+          "spacing": "None"
+        }
+      ]
+    },
 
-### 1. Compose — ID
+    {
+      "type": "FactSet",
+      "spacing": "Medium",
+      "facts": [
+        {
+          "title": "Reporting Date",
+          "value": "${ReportingDate}"
+        }
+      ]
+    },
 
-Expression:
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔴 Show Stopper / High Priority Items / Upcoming Critical CHGs",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ShowStopperDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(first(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|')))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟠 PRBs Linked with Current Day Incidents",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "${PRBDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-### 2. Compose — Title
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔵 RITM",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${RITMDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),1)))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟡 Problems",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ProblemsDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-### 3. Compose — Description
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚪ CTASKS",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${CTASKDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),2)))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚫ GTSOPS Tickets",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${GTSOPSDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-### 4. Compose — Owner
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔴 Critical Malcodes",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${CriticalMalcodesDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(replace(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),3)),'Owner:',''))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚪ Non Critical Malcodes",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${NonCriticalMalcodesDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-### 5. Compose — Priority
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥 Group 1",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group1Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),4)))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥 Group 2",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group2Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-### 6. Compose — Status
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥 Group 3",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group3Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-```text
-trim(first(skip(split(body('Post_adaptive_card_and_wait_for_a_response')?['data']?['PriorityData'],'|'),5)))
-```
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥 Group 4",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group4Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-**Important:** Agar tumhare action ka actual naam `Post adaptive card and wait for a response` alag hai, expression mein `Post_adaptive_card_and_wait_for_a_response` ki jagah **apne action ka exact internal name** use karna.
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "👥 Group 5",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${Group5Details}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
 
-Uske baad **UpdatePriority mein in 6 Compose outputs map karenge.**
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟣 Ingestion",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${IngestionDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🔵 ETL",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${ETLDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🟢 Synapse",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${SynapseDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚫ Other",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${OtherDetails}",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    }
+  ]
+}
