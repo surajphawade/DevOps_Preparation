@@ -142,3 +142,25 @@ Yes, Send Email   No, Cancel
     }
   ]
 }
+
+
+
+-------------------------
+
+
+concat(
+  '• ',
+  replace(
+    replace(
+      replace(
+        outputs('Compose_-_Group_2'),
+        decodeUriComponent('%0D%0A'),
+        concat(decodeUriComponent('%0A'), '• ')
+      ),
+      decodeUriComponent('%0A'),
+      concat(decodeUriComponent('%0A'), '• ')
+    ),
+    decodeUriComponent('%5Cn'),
+    concat(decodeUriComponent('%0A'), '• ')
+  )
+)
