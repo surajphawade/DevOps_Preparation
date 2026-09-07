@@ -164,3 +164,25 @@ concat(
     concat(decodeUriComponent('%0A'), '• ')
   )
 )
+
+
+
+------------------
+
+
+concat(
+  '• ',
+  replace(
+    replace(
+      replace(
+        outputs('Compose_-_Group_1'),
+        decodeUriComponent('%0D%0A'),
+        '<br>• '
+      ),
+      decodeUriComponent('%0A'),
+      '<br>• '
+    ),
+    decodeUriComponent('%5Cn'),
+    '<br>• '
+  )
+)
