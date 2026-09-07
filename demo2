@@ -70,7 +70,8 @@
 
 ------------------
 
-body('Post_adaptive_card_and_wait_for_a_response')?['submitActionId']
+body('Post_adaptive_card_and_wait_for_a_response')?['submitActionId'
+]
 
 HO email confirmation received. The selected action has been processed.
 
@@ -85,3 +86,59 @@ Are you sure you want to send the HO (Handover) email?
 Please review the HO sheet and confirm below. The email will be sent only after you select "Yes, Send Email".
 
 Yes, Send Email   No, Cancel
+
+-----------------
+
+
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "WEALTH HANDOVER",
+      "weight": "Bolder",
+      "size": "ExtraLarge",
+      "color": "Good",
+      "horizontalAlignment": "Center"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Operations Shift Summary",
+      "weight": "Bolder",
+      "size": "Medium",
+      "horizontalAlignment": "Center",
+      "spacing": "Small"
+    },
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "REQUEST ABORTED",
+          "weight": "Bolder",
+          "size": "Large",
+          "horizontalAlignment": "Center",
+          "color": "Attention"
+        },
+        {
+          "type": "TextBlock",
+          "text": "The HO handover email request has been cancelled.",
+          "wrap": true,
+          "horizontalAlignment": "Center",
+          "spacing": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "No email has been sent.",
+          "weight": "Bolder",
+          "wrap": true,
+          "horizontalAlignment": "Center",
+          "spacing": "Small"
+        }
+      ]
+    }
+  ]
+}
