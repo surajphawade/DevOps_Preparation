@@ -1,9 +1,87 @@
-replace(
-  replace(
-    outputs('Compose_-_Group_1'),
-    decodeUriComponent('%0D%0A'),
-    '\n'
-  ),
-  decodeUriComponent('%0A'),
-  '\n'
-)
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "WEALTH HANDOVER",
+      "weight": "Bolder",
+      "size": "ExtraLarge",
+      "color": "Good",
+      "horizontalAlignment": "Center"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Operations Shift Summary",
+      "weight": "Bolder",
+      "size": "Medium",
+      "horizontalAlignment": "Center",
+      "spacing": "Small"
+    },
+    {
+      "type": "TextBlock",
+      "text": "CONFIRMATION FOR HANDOVER EMAIL",
+      "weight": "Bolder",
+      "size": "Medium",
+      "horizontalAlignment": "Center",
+      "spacing": "Large"
+    },
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Are you sure you want to send the HO (Handover) email?",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true,
+          "horizontalAlignment": "Center"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Please review the HO sheet and confirm below. The email will be sent only after you select \"Yes, Send Email\".",
+          "wrap": true,
+          "spacing": "Small",
+          "horizontalAlignment": "Center"
+        }
+      ],
+      "spacing": "Medium"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "✓ Yes, Send Email",
+      "data": {
+        "action": "sendHOEmail"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "✕ No, Cancel",
+      "data": {
+        "action": "cancelHOEmail"
+      }
+    }
+  ]
+}
+
+------------------
+
+body('Post_adaptive_card_and_wait_for_a_response')?['submitActionId']
+
+HO email confirmation received. The selected action has been processed.
+
+
+WEALTH HANDOVER
+Operations Shift Summary
+
+CONFIRMATION FOR HANDOVER EMAIL
+
+Are you sure you want to send the HO (Handover) email?
+
+Please review the HO sheet and confirm below. The email will be sent only after you select "Yes, Send Email".
+
+Yes, Send Email   No, Cancel
