@@ -186,3 +186,24 @@ concat(
     '<br>• '
   )
 )
+
+-------
+
+concat(
+  '• ',
+  replace(
+    trim(
+      replace(
+        replace(
+          outputs('Compose_-_Group_1'),
+          decodeUriComponent('%0D%0A'),
+          decodeUriComponent('%0A')
+        ),
+        decodeUriComponent('%5Cn'),
+        decodeUriComponent('%0A')
+      )
+    ),
+    decodeUriComponent('%0A'),
+    '<br>• '
+  )
+)
