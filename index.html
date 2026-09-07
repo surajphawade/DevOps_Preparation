@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Wealth Consolidated Handover</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, Helvetica, sans-serif; color:#000000;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="width:100%; border-collapse:collapse;">
+
+<tr>
+<td style="padding:8px 12px;">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="width:100%; border-collapse:collapse; table-layout:fixed; font-size:12px;">
+
+<colgroup>
+<col style="width:30%;">
+<col style="width:18%;">
+<col style="width:52%;">
+</colgroup>
+
+<tr>
+<td colspan="2"
+    style="width:48%; border:1px solid #999999; height:78px; padding:8px; vertical-align:top;">
+&nbsp;
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:8px; vertical-align:top; line-height:17px;">
+<b>ETL Job Monitoring Cheat Sheet(PSS Internal)</b> :
+<a href="{{ETL_CHEAT_SHEET_LINK}}" style="color:#0563C1; text-decoration:underline;">
+{{ETL_CHEAT_SHEET_LINK}}
+</a>
+<br>
+<b>Critical Ingestion Malcodes</b> :
+{{CRITICAL_INGESTION_MALCODES}}
+<br>
+<b>Critical ETL List</b> :
+<a href="{{CRITICAL_ETL_LINK}}" style="color:#0563C1; text-decoration:underline;">
+{{CRITICAL_ETL_LINK}}
+</a>
+</td>
+</tr>
+
+<tr>
+<td colspan="2"
+    style="width:48%; border:1px solid #999999; background-color:#D9EAD3; padding:10px; font-weight:bold; vertical-align:middle;">
+Reporting Date
+</td>
+
+<td style="width:52%; border:1px solid #999999; background-color:#00B050; padding:10px; font-weight:bold; vertical-align:middle;">
+{{REPORTING_DATE}}
+</td>
+</tr>
+
+<tr>
+<td colspan="2"
+    style="width:48%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#C00000;">
+Show stopper / High Priority items/Upcoming Critical CHGs
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:10px; vertical-align:top; line-height:18px;">
+{{SHOW_STOPPER}}
+</td>
+</tr>
+
+<tr>
+<td colspan="2"
+    style="width:48%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#C00000;">
+PRBs linked with current day Incidents
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:10px; vertical-align:top; line-height:18px;">
+{{PRB_INCIDENTS}}
+</td>
+</tr>
+
+<tr>
+<td rowspan="4"
+    style="width:30%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#008000;">
+Service Requests Validation
+</td>
+
+<td style="width:18%; border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+RITM
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{RITM}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Problems
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{PROBLEMS}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+CTASKs
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{CTASKS}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+GTISOPS Tickets
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GTISOPS_TICKETS}}
+</td>
+</tr>
+
+<tr>
+<td rowspan="2"
+    style="width:30%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#008080;">
+Ingestion Checks(Pending/Need to monitor)
+</td>
+
+<td style="width:18%; border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Critical Malcodes
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{CRITICAL_MALCODES}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Non Critical Malcodes
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{NON_CRITICAL_MALCODES}}
+</td>
+</tr>
+
+<tr>
+<td rowspan="5"
+    style="width:30%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#7030A0;">
+ETLs(Pending/Need to monitor)
+</td>
+
+<td style="width:18%; border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Group 1
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GROUP1}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Group 2
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GROUP2}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Group 3
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GROUP3}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Group 4
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GROUP4}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Group 5
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{GROUP5}}
+</td>
+</tr>
+
+<tr>
+<td rowspan="4"
+    style="width:30%; border:1px solid #999999; padding:10px; vertical-align:top; font-weight:bold; color:#C00000;">
+BAU Related Issues(Emails that needs followup)
+</td>
+
+<td style="width:18%; border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Ingestion
+</td>
+
+<td style="width:52%; border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{BAU_INGESTION}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+ETL
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{BAU_ETL}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Synapse
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{BAU_SYNAPSE}}
+</td>
+</tr>
+
+<tr>
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; font-weight:bold;">
+Other
+</td>
+
+<td style="border:1px solid #999999; padding:7px 8px; vertical-align:top; line-height:18px;">
+{{BAU_OTHER}}
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
