@@ -1,12 +1,45 @@
+trim(
+  replace(
+    replace(
+      replace(
+        replace(
+          toLower(outputs('Compose_-_Read_Email_Subject')),
+          're:',
+          ''
+        ),
+        'fw:',
+        ''
+      ),
+      'fwd:',
+      ''
+    ),
+    '  ',
+    ' '
+  )
+)
+
+@or(
+  contains(
+    toLower(outputs('Compose_Clean_ETL')),
+    outputs('Compose_Clean_Email_Subject')
+  ),
+  contains(
+    toLower(outputs('Compose_Clean_Ingestion')),
+    outputs('Compose_Clean_Email_Subject')
+  )
+)
+
 
 -----
 @and(
     equals(
-        toLower(trim(item()?['IncidentId'])),
+        toLower(trim(item()?['IncidentId'
+])),
         toLower(trim(outputs('Outputs')))
     ),
     equals(
-        toLower(trim(item()?['Category'])),
+        toLower(trim(item()?['Category'
+])),
         'fw ing'
     )
 )
@@ -49,7 +82,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "spacing": "Medium",
@@ -69,7 +101,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "accent",
@@ -139,7 +170,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "spacing": "Medium",
@@ -208,7 +238,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "attention",
@@ -277,7 +306,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "spacing": "Medium",
@@ -346,7 +374,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "good",
@@ -367,7 +394,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "spacing": "Small",
@@ -475,7 +501,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "style": "emphasis",
@@ -523,7 +548,6 @@
         }
       ]
     },
-
     {
       "type": "Container",
       "spacing": "Medium",
