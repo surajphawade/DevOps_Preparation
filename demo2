@@ -1,3 +1,18 @@
+
+-----
+@and(
+    equals(
+        toLower(trim(item()?['IncidentId'])),
+        toLower(trim(outputs('Outputs')))
+    ),
+    equals(
+        toLower(trim(item()?['Category'])),
+        'fw ing'
+    )
+)
+
+-----------------------
+
 {
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
