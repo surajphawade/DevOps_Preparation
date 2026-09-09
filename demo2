@@ -1,209 +1,534 @@
 {
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
-  "version": "1.4",
+  "version": "1.5",
   "body": [
-    {
-      "type": "TextBlock",
-      "text": "WEALTH HANDOVER",
-      "weight": "Bolder",
-      "size": "ExtraLarge",
-      "color": "Good",
-      "horizontalAlignment": "Center"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Operations Shift Summary",
-      "weight": "Bolder",
-      "size": "Medium",
-      "horizontalAlignment": "Center",
-      "spacing": "Small"
-    },
-    {
-      "type": "TextBlock",
-      "text": "CONFIRMATION FOR HANDOVER EMAIL",
-      "weight": "Bolder",
-      "size": "Medium",
-      "horizontalAlignment": "Center",
-      "spacing": "Large"
-    },
     {
       "type": "Container",
       "style": "emphasis",
+      "bleed": true,
       "items": [
         {
           "type": "TextBlock",
-          "text": "Are you sure you want to send the HO (Handover) email?",
+          "text": "🤖 Wealth Ops Assistant",
+          "size": "ExtraLarge",
           "weight": "Bolder",
+          "color": "Accent",
+          "horizontalAlignment": "Center"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Your command hub for ETL, Ingestion, Incidents & Handover",
           "size": "Medium",
+          "weight": "Bolder",
+          "horizontalAlignment": "Center",
           "wrap": true,
-          "horizontalAlignment": "Center"
+          "spacing": "Small"
         },
         {
           "type": "TextBlock",
-          "text": "Please review the HO sheet and confirm below. The email will be sent only after you select \"Yes, Send Email\".",
-          "wrap": true,
-          "spacing": "Small",
-          "horizontalAlignment": "Center"
+          "text": "Use the commands below directly in the Teams chat.",
+          "horizontalAlignment": "Center",
+          "isSubtle": true,
+          "wrap": true
         }
-      ],
-      "spacing": "Medium"
-    }
-  ],
-  "actions": [
-    {
-      "type": "Action.Submit",
-      "title": "✓ Yes, Send Email",
-      "data": {
-        "action": "sendHOEmail"
-      }
+      ]
     },
-    {
-      "type": "Action.Submit",
-      "title": "✕ No, Cancel",
-      "data": {
-        "action": "cancelHOEmail"
-      }
-    }
-  ]
-}
 
-------------------
-
-body('Post_adaptive_card_and_wait_for_a_response')?['submitActionId'
-]
-
-HO email confirmation received. The selected action has been processed.
-
-
-WEALTH HANDOVER
-Operations Shift Summary
-
-CONFIRMATION FOR HANDOVER EMAIL
-
-Are you sure you want to send the HO (Handover) email?
-
-Please review the HO sheet and confirm below. The email will be sent only after you select "Yes, Send Email".
-
-Yes, Send Email   No, Cancel
-
------------------
-
-
-{
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "type": "AdaptiveCard",
-  "version": "1.4",
-  "body": [
-    {
-      "type": "TextBlock",
-      "text": "WEALTH HANDOVER",
-      "weight": "Bolder",
-      "size": "ExtraLarge",
-      "color": "Good",
-      "horizontalAlignment": "Center"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Operations Shift Summary",
-      "weight": "Bolder",
-      "size": "Medium",
-      "horizontalAlignment": "Center",
-      "spacing": "Small"
-    },
     {
       "type": "Container",
-      "style": "emphasis",
+      "spacing": "Medium",
       "items": [
         {
           "type": "TextBlock",
-          "text": "REQUEST ABORTED",
-          "weight": "Bolder",
+          "text": "⚡ Quick Command Guide",
           "size": "Large",
-          "horizontalAlignment": "Center",
-          "color": "Attention"
+          "weight": "Bolder",
+          "color": "Accent"
         },
         {
           "type": "TextBlock",
-          "text": "The HO handover email request has been cancelled.",
+          "text": "Choose the command based on what you need. Replace the values inside < > with your actual information.",
           "wrap": true,
-          "horizontalAlignment": "Center",
+          "isSubtle": true
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "accent",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🔵",
+                  "size": "ExtraLarge"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/ETL",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "color": "Accent"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Get complete ETL job information and dependency details.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "USE WITH",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true,
           "spacing": "Medium"
         },
         {
           "type": "TextBlock",
-          "text": "No email has been sent.",
-          "weight": "Bolder",
+          "text": "/ETL <JobName>\n/ETL <JobID>",
+          "fontType": "Monospace",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Example:  /ETL Customer_Load",
+          "fontType": "Monospace",
+          "color": "Good",
           "wrap": true,
+          "spacing": "Small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "📌 Returns: Job details • Dependencies • Related jobs • Execution information",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "🟢",
+                  "size": "ExtraLarge"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/ING",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "color": "Good"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Find ingestion information using an Entity Name or File Pattern.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "USE WITH",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true,
+          "spacing": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "/ING <EntityName>\n/ING <FilePattern>",
+          "fontType": "Monospace",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Example:  /ING Customer\nExample:  /ING Customer_*.csv",
+          "fontType": "Monospace",
+          "color": "Good",
+          "wrap": true,
+          "spacing": "Small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "📌 Returns: Entity details • File pattern • Related ETL information • Ingestion details",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "attention",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "📧",
+                  "size": "ExtraLarge"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/FWEMAIL",
+                  "size": "Large",
+                  "weight": "Bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Generate the FileWatcher incident email using an incident number.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "USE WITH",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true,
+          "spacing": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "/FWEMAIL <IncidentNumber>",
+          "fontType": "Monospace",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Example:  /FWEMAIL INC11878054",
+          "fontType": "Monospace",
+          "color": "Good",
+          "wrap": true,
+          "spacing": "Small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "📌 Useful for: FileWatcher alerts • Dependent job identification • Incident email preparation",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "📊",
+                  "size": "ExtraLarge"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/ETEMAIL",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "color": "Warning"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Generate the email for an Entity Threshold error.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "USE WITH",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true,
+          "spacing": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "/ETEMAIL <IncidentNumber>",
+          "fontType": "Monospace",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Example:  /ETEMAIL INC11828635",
+          "fontType": "Monospace",
+          "color": "Good",
+          "wrap": true,
+          "spacing": "Small"
+        },
+        {
+          "type": "TextBlock",
+          "text": "📌 Useful for: Entity Threshold alerts • Incident communication • Email preparation",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "good",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "📋 HANDOVER (HO) COMMANDS",
+          "size": "Large",
+          "weight": "Bolder",
+          "color": "Good"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Three commands are available for daily handover activities.",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Small",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "1️⃣",
+                  "size": "Medium"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/HO UPDATE",
+                  "weight": "Bolder",
+                  "size": "Medium"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Get the complete current HO update directly in Teams.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "2️⃣",
+                  "size": "Medium"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/HO EMAIL",
+                  "weight": "Bolder",
+                  "size": "Medium"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Prepare/send the HO update through email.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "3️⃣",
+                  "size": "Medium"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "/HO GROUP",
+                  "weight": "Bolder",
+                  "size": "Medium"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Get the ETL group-wise HO update covering all 5 groups.",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "💡 QUICK REFERENCE",
+          "size": "Medium",
+          "weight": "Bolder",
+          "color": "Accent"
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "title": "/ETL",
+              "value": "Job / dependency information"
+            },
+            {
+              "title": "/ING",
+              "value": "Entity / file ingestion information"
+            },
+            {
+              "title": "/FWEMAIL",
+              "value": "FileWatcher incident email"
+            },
+            {
+              "title": "/ETEMAIL",
+              "value": "Entity Threshold error email"
+            },
+            {
+              "title": "/HO UPDATE",
+              "value": "Complete HO update in Teams"
+            },
+            {
+              "title": "/HO EMAIL",
+              "value": "HO email"
+            },
+            {
+              "title": "/HO GROUP",
+              "value": "All 5 ETL group updates"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "🚀 Less manual searching. Faster incident handling. Better handovers.",
+          "weight": "Bolder",
           "horizontalAlignment": "Center",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Type /INFO anytime to view this command guide again.",
+          "horizontalAlignment": "Center",
+          "isSubtle": true,
+          "wrap": true,
           "spacing": "Small"
         }
       ]
     }
   ]
 }
-
-
-
--------------------------
-
-
-concat(
-  '• ',
-  replace(
-    replace(
-      replace(
-        outputs('Compose_-_Group_2'),
-        decodeUriComponent('%0D%0A'),
-        concat(decodeUriComponent('%0A'), '• ')
-      ),
-      decodeUriComponent('%0A'),
-      concat(decodeUriComponent('%0A'), '• ')
-    ),
-    decodeUriComponent('%5Cn'),
-    concat(decodeUriComponent('%0A'), '• ')
-  )
-)
-
-
-
-------------------
-
-
-concat(
-  '• ',
-  replace(
-    replace(
-      replace(
-        outputs('Compose_-_Group_1'),
-        decodeUriComponent('%0D%0A'),
-        '<br>• '
-      ),
-      decodeUriComponent('%0A'),
-      '<br>• '
-    ),
-    decodeUriComponent('%5Cn'),
-    '<br>• '
-  )
-)
-
--------
-
-concat(
-  '• ',
-  replace(
-    trim(
-      replace(
-        replace(
-          outputs('Compose_-_Group_1'),
-          decodeUriComponent('%0D%0A'),
-          decodeUriComponent('%0A')
-        ),
-        decodeUriComponent('%5Cn'),
-        decodeUriComponent('%0A')
-      )
-    ),
-    decodeUriComponent('%0A'),
-    '<br>• '
-  )
-)
