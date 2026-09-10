@@ -1,1 +1,192 @@
---
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "bleed": true,
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "✉",
+                  "size": "ExtraLarge",
+                  "weight": "Bolder"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "EMAIL MATCHED",
+                  "weight": "Bolder",
+                  "size": "Large"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "HO AUTOMATION",
+                  "size": "Small",
+                  "spacing": "None",
+                  "isSubtle": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "●",
+                  "size": "Medium",
+                  "weight": "Bolder"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "FROM",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "@{triggerOutputs()?['body/from']?['emailAddress']?['address']}",
+          "size": "Medium",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "SUBJECT",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "@{outputs('Compose_-_Read_Email_Subject')}",
+          "weight": "Bolder",
+          "size": "Medium",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "spacing": "Medium",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "RECEIVED",
+              "size": "Small",
+              "weight": "Bolder",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "@{formatDateTime(triggerOutputs()?['body/receivedDateTime'],'dd-MMM-yyyy HH:mm')}",
+              "spacing": "Small"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "SECTION",
+              "size": "Small",
+              "weight": "Bolder",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "@{if(contains(toLower(outputs('Compose_Clean_ETL')),outputs('Compose_Clean_Email_Subject')),'ETL','INGESTION')}",
+              "weight": "Bolder",
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "accent",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚠  HO MATCH FOUND",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "This email subject matches an entry maintained in the HO Automation sheet.",
+          "wrap": true,
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "EMAIL PREVIEW",
+          "size": "Small",
+          "weight": "Bolder",
+          "isSubtle": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "@{triggerOutputs()?['body/bodyPreview']}",
+          "wrap": true,
+          "spacing": "Small",
+          "maxLines": 5
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Email",
+      "url": "@{triggerOutputs()?['body/webLink']}"
+    }
+  ]
+}
