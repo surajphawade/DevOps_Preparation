@@ -1,192 +1,209 @@
-{
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "type": "AdaptiveCard",
-  "version": "1.5",
-  "body": [
-    {
-      "type": "Container",
-      "style": "emphasis",
-      "bleed": true,
-      "items": [
-        {
-          "type": "ColumnSet",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "auto",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "✉",
-                  "size": "ExtraLarge",
-                  "weight": "Bolder"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "stretch",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "EMAIL MATCHED",
-                  "weight": "Bolder",
-                  "size": "Large"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "HO AUTOMATION",
-                  "size": "Small",
-                  "spacing": "None",
-                  "isSubtle": true
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "auto",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "●",
-                  "size": "Medium",
-                  "weight": "Bolder"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "Container",
-      "spacing": "Medium",
-      "items": [
-        {
-          "type": "TextBlock",
-          "text": "FROM",
-          "size": "Small",
-          "weight": "Bolder",
-          "isSubtle": true
-        },
-        {
-          "type": "TextBlock",
-          "text": "@{triggerOutputs()?['body/from']?['emailAddress']?['address']}",
-          "size": "Medium",
-          "wrap": true,
-          "spacing": "Small"
-        }
-      ]
-    },
-    {
-      "type": "Container",
-      "spacing": "Medium",
-      "items": [
-        {
-          "type": "TextBlock",
-          "text": "SUBJECT",
-          "size": "Small",
-          "weight": "Bolder",
-          "isSubtle": true
-        },
-        {
-          "type": "TextBlock",
-          "text": "@{outputs('Compose_-_Read_Email_Subject')}",
-          "weight": "Bolder",
-          "size": "Medium",
-          "wrap": true,
-          "spacing": "Small"
-        }
-      ]
-    },
-    {
-      "type": "ColumnSet",
-      "spacing": "Medium",
-      "columns": [
-        {
-          "type": "Column",
-          "width": "stretch",
-          "items": [
-            {
-              "type": "TextBlock",
-              "text": "RECEIVED",
-              "size": "Small",
-              "weight": "Bolder",
-              "isSubtle": true
-            },
-            {
-              "type": "TextBlock",
-              "text": "@{formatDateTime(triggerOutputs()?['body/receivedDateTime'],'dd-MMM-yyyy HH:mm')}",
-              "spacing": "Small"
-            }
-          ]
-        },
-        {
-          "type": "Column",
-          "width": "auto",
-          "items": [
-            {
-              "type": "TextBlock",
-              "text": "SECTION",
-              "size": "Small",
-              "weight": "Bolder",
-              "isSubtle": true
-            },
-            {
-              "type": "TextBlock",
-              "text": "@{if(contains(toLower(outputs('Compose_Clean_ETL')),outputs('Compose_Clean_Email_Subject')),'ETL','INGESTION')}",
-              "weight": "Bolder",
-              "spacing": "Small"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "Container",
-      "style": "accent",
-      "spacing": "Medium",
-      "items": [
-        {
-          "type": "TextBlock",
-          "text": "⚠  HO MATCH FOUND",
-          "weight": "Bolder",
-          "size": "Medium"
-        },
-        {
-          "type": "TextBlock",
-          "text": "This email subject matches an entry maintained in the HO Automation sheet.",
-          "wrap": true,
-          "spacing": "Small"
-        }
-      ]
-    },
-    {
-      "type": "Container",
-      "spacing": "Medium",
-      "items": [
-        {
-          "type": "TextBlock",
-          "text": "EMAIL PREVIEW",
-          "size": "Small",
-          "weight": "Bolder",
-          "isSubtle": true
-        },
-        {
-          "type": "TextBlock",
-          "text": "@{triggerOutputs()?['body/bodyPreview']}",
-          "wrap": true,
-          "spacing": "Small",
-          "maxLines": 5
-        }
-      ]
-    }
-  ],
-  "actions": [
-    {
-      "type": "Action.OpenUrl",
-      "title": "Open Email",
-      "url": "@{triggerOutputs()?['body/webLink']}"
-    }
-  ]
-}
+Yes bro. I checked your current flow. **Do not change anything you already created.** We continue from **Compose – Normalized Row**.
+
+Your Excel columns are:
+
+`RunId | PipelineName | PipelineRunStatus | RunStart | RunEnd | Duration | JobName | JobId | TriggerName | Parameters | ProcessedDate | SourceFile`
+
+### STEP 2 — Continue inside `Apply to each`
+
+You currently have:
+
+1. Compose – Current Row ✅
+2. Compose – Clean Row ✅
+3. Compose – Normalized Row ✅
+
+Now add these **in this exact order**:
+
+---
+
+### 4. Add → Compose
+
+Name:
+
+**Compose – Columns**
+
+Expression:
+
+```text
+split(outputs('Compose_-_Normalized_Row'), ',')
+```
+
+---
+
+### 5. Add → Compose
+
+Name:
+
+**Compose – RunId**
+
+Expression:
+
+```text
+trim(first(outputs('Compose_-_Columns')))
+```
+
+---
+
+### 6. Add → Compose
+
+Name:
+
+**Compose – PipelineName**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[1])
+```
+
+---
+
+### 7. Add → Compose
+
+Name:
+
+**Compose – PipelineRunStatus**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[2])
+```
+
+---
+
+### 8. Add → Compose
+
+Name:
+
+**Compose – RunStart**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[3])
+```
+
+---
+
+### 9. Add → Compose
+
+Name:
+
+**Compose – RunEnd**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[4])
+```
+
+---
+
+### 10. Add → Compose
+
+Name:
+
+**Compose – Duration**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[5])
+```
+
+---
+
+### 11. Add → Compose
+
+Name:
+
+**Compose – JobName**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[6])
+```
+
+---
+
+### 12. Add → Compose
+
+Name:
+
+**Compose – JobId**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[7])
+```
+
+---
+
+### 13. Add → Compose
+
+Name:
+
+**Compose – TriggerName**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[8])
+```
+
+---
+
+### 14. Add → Compose
+
+Name:
+
+**Compose – Parameters**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[9])
+```
+
+---
+
+### 15. Add → Compose
+
+Name:
+
+**Compose – ProcessedDate**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[10])
+```
+
+---
+
+### 16. Add → Compose
+
+Name:
+
+**Compose – SourceFile**
+
+Expression:
+
+```text
+trim(outputs('Compose_-_Columns')[11])
+```
+
+---
+
+### ⚠️ Important
+
+**Don't add Excel action yet.**
+
+First create these Composes up to **SourceFile**.
+
+Then send me **one screenshot showing the bottom of Apply to each**. I'll give you the next block — **Excel Add Row + duplicate/header protection + final flow**.
+
+We are building it sequentially; **don't modify the previous steps.**
