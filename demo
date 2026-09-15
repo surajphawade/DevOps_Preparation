@@ -1,22 +1,19 @@
 trim(
-  first(
-    skip(
-      outputs('Compose_-_Columns'),
-      int(
+    first(
         xpath(
-          xml(
-            concat(
-              '<r><c>',
-              join(
-                outputs('Compose_-_Headers'),
-                '</c><c>'
-              ),
-              '</c></r>'
-            )
-          ),
-          'count(/r/c[normalize-space(.)="Run ID"]/preceding-sibling::c)'
+            xml(
+                concat(
+                    '<r>',
+                    '<h><c>',
+                    join(outputs('Compose_-_Headers'), '</c><c>'),
+                    '</c></h>',
+                    '<d><c>',
+                    join(outputs('Compose_-_Columns'), '</c><c>'),
+                    '</c></d>',
+                    '</r>'
+                )
+            ),
+            '/r/d/c[position() = count(/r/h/c[normalize-space(.)="Run ID"]/preceding-sibling::c)+1]'
         )
-      )
     )
-  )
 )
