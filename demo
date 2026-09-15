@@ -1,209 +1,531 @@
-Yes bro. I checked your current flow. **Do not change anything you already created.** We continue from **Compose – Normalized Row**.
+Yes bro, now I can see the **complete structure** of your flow. We can make it dynamic without rebuilding everything.
 
-Your Excel columns are:
+Your current flow is:
 
-`RunId | PipelineName | PipelineRunStatus | RunStart | RunEnd | Duration | JobName | JobId | TriggerName | Parameters | ProcessedDate | SourceFile`
+```text
+CSV
+ ↓
+CSV Rows
+ ↓
+Header Row
+ ↓
+Headers
+ ↓
+Data Rows
+ ↓
+Apply to each
+    ↓
+Current Row
+    ↓
+Clean Row
+    ↓
+Normalized Row
+    ↓
+Columns
+    ↓
+RunId
+    ↓
+PipelineName
+    ↓
+PipelineRunStatus
+    ↓
+RunStart
+    ↓
+RunEnd
+    ↓
+Duration
+    ↓
+JobId
+    ↓
+Clean JobId
+    ↓
+TriggerName
+    ↓
+Parameters
+    ↓
+Condition
+    ↓
+Add row to Excel
+```
 
-### STEP 2 — Continue inside `Apply to each`
+We will **keep this structure**.
 
-You currently have:
+### But one change
 
-1. Compose – Current Row ✅
-2. Compose – Clean Row ✅
-3. Compose – Normalized Row ✅
+We will stop using:
 
-Now add these **in this exact order**:
+```text
+Columns[15]
+Columns[16]
+Columns[17]
+```
+
+Instead, we'll determine the column position from the **header name**.
 
 ---
 
-### 4. Add → Compose
+# STEP 1 — Keep these 2 actions
 
-Name:
+You already added:
 
-**Compose – Columns**
+### Compose - Header Row
+
+Keep it.
+
+```powerautomate
+first(outputs('Compose_-_CSV_Rows'))
+```
+
+### Compose - Headers
+
+Keep it.
+
+```powerautomate
+split(outputs('Compose_-_Header_Row'),',')
+```
+
+Do **not** change these.
+
+---
+
+# STEP 2 — Add `Compose - Header Text`
+
+Add this **immediately after `Compose - Headers`**.
 
 Expression:
 
+```powerautomate
+join(outputs('Compose_-_Headers'),'|')
+```
+
+So now:
+
 ```text
-split(outputs('Compose_-_Normalized_Row'), ',')
+Compose - CSV Rows
+↓
+Compose - Header Row
+↓
+Compose - Headers
+↓
+Compose - Header Text
+↓
+Compose - Data Rows
+↓
+Apply to each
 ```
 
 ---
 
-### 5. Add → Compose
+# STEP 3 — Inside Apply to each, change RunId
 
-Name:
+Go to:
 
 **Compose – RunId**
 
-Expression:
+Delete the current expression that uses something like:
+
+```powerautomate
+outputs('Compose_-_Columns')[...]
+```
+
+Use this instead:
+
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+              '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Run ID"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
+```
+
+This looks big, but the important part is:
 
 ```text
-trim(first(outputs('Compose_-_Columns')))
+"Run ID"
 ```
+
+The expression searches the **actual header** for `Run ID` and finds its position.
+
+So it doesn't matter whether Run ID is column 8, 15, 20 or 25.
 
 ---
 
-### 6. Add → Compose
+# STEP 4 — PipelineName
 
-Name:
+Go to:
 
 **Compose – PipelineName**
 
-Expression:
+Replace the current `[number]` expression with:
+
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+              '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Pipeline name"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
+```
+
+Notice only this changes:
 
 ```text
-trim(outputs('Compose_-_Columns')[1])
+Pipeline name
 ```
 
 ---
 
-### 7. Add → Compose
+# STEP 5 — PipelineRunStatus
 
-Name:
+Replace its current column-number expression with:
 
-**Compose – PipelineRunStatus**
-
-Expression:
-
-```text
-trim(outputs('Compose_-_Columns')[2])
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+              '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Status"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
 ```
 
 ---
 
-### 8. Add → Compose
+# STEP 6 — RunStart
 
-Name:
+Use:
 
-**Compose – RunStart**
-
-Expression:
-
-```text
-trim(outputs('Compose_-_Columns')[3])
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+              '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Run start"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
 ```
 
 ---
 
-### 9. Add → Compose
+# STEP 7 — RunEnd
 
-Name:
+Use:
 
-**Compose – RunEnd**
-
-Expression:
-
-```text
-trim(outputs('Compose_-_Columns')[4])
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+              '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Run end"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
 ```
 
 ---
 
-### 10. Add → Compose
+# STEP 8 — Duration
 
-Name:
+Use:
 
-**Compose – Duration**
-
-Expression:
-
-```text
-trim(outputs('Compose_-_Columns')[5])
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+                '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="Duration"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
 ```
 
 ---
 
-### 11. Add → Compose
+# STEP 9 — JobId
 
-Name:
+For **Compose – JobId**, use:
 
-**Compose – JobName**
+```powerautomate
+trim(
+  first(
+    skip(
+      outputs('Compose_-_Columns'),
+      xpath(
+        xml(
+          concat(
+            '<r><c>',
+            replace(
+              replace(
+                replace(
+                  outputs('Compose_-_Header_Text'),
+                  '&',
+                  '&amp;'
+                ),
+                '<',
+                '&lt;'
+              ),
+              '>',
+                '&gt;'
+            ),
+            '</c></r>'
+          )
+        ),
+        'count(/r/c[.="ETL Job Id"]/preceding-sibling::c)'
+      )
+    )
+  )
+)
+```
 
-Expression:
+Then your existing **Compose – Clean JobId** can remain:
 
-```text
-trim(outputs('Compose_-_Columns')[6])
+```powerautomate
+trim(
+  replace(
+    replace(
+      replace(
+        outputs('Compose_-_JobId'),
+        '[""',
+        ''
+      ),
+      '""',
+      ''
+    ),
+    ',null]',
+    ''
+  )
+)
 ```
 
 ---
 
-### 12. Add → Compose
+# STEP 10 — TriggerName
 
-Name:
-
-**Compose – JobId**
-
-Expression:
+Use header:
 
 ```text
-trim(outputs('Compose_-_Columns')[7])
+Triggered by
+```
+
+So replace the current expression with the same pattern, changing the XPath part to:
+
+```text
+count(/r/c[.="Triggered by"]/preceding-sibling::c)
 ```
 
 ---
 
-### 13. Add → Compose
+# STEP 11 — Parameters
 
-Name:
-
-**Compose – TriggerName**
-
-Expression:
+Use header:
 
 ```text
-trim(outputs('Compose_-_Columns')[8])
+Parameter
+```
+
+Change the XPath part to:
+
+```text
+count(/r/c[.="Parameter"]/preceding-sibling::c)
 ```
 
 ---
 
-### 14. Add → Compose
+## Your final architecture
 
-Name:
-
-**Compose – Parameters**
-
-Expression:
+It will now be:
 
 ```text
-trim(outputs('Compose_-_Columns')[9])
+Compose - CSV Rows
+        ↓
+Compose - Header Row
+        ↓
+Compose - Headers
+        ↓
+Compose - Header Text
+        ↓
+Compose - Data Rows
+        ↓
+     Apply to each
+        ↓
+Compose - Current Row
+        ↓
+Compose - Clean Row
+        ↓
+Compose - Normalized Row
+        ↓
+Compose - Columns
+        ↓
+       ┌───────────────────────┐
+       │ Find by HEADER NAME   │
+       └───────────────────────┘
+        ↓
+RunId          → "Run ID"
+PipelineName   → "Pipeline name"
+Status         → "Status"
+RunStart       → "Run start"
+RunEnd         → "Run end"
+Duration       → "Duration"
+JobId          → "ETL Job Id"
+TriggerName    → "Triggered by"
+Parameters     → "Parameter"
+        ↓
+Condition
+        ↓
+Add row to RunDetails
 ```
 
----
+### Important
 
-### 15. Add → Compose
+**Don't change `Compose - Columns`, `Current Row`, `Clean Row`, or `Normalized Row` yet.** They are your existing CSV parsing layer.
 
-Name:
+The only thing we're changing is **how the individual fields are selected from `Columns`**.
 
-**Compose – ProcessedDate**
-
-Expression:
+And this means if ADF changes from:
 
 ```text
-trim(outputs('Compose_-_Columns')[10])
+Pipeline | Status | Run ID | Job ID
 ```
 
----
-
-### 16. Add → Compose
-
-Name:
-
-**Compose – SourceFile**
-
-Expression:
+to:
 
 ```text
-trim(outputs('Compose_-_Columns')[11])
+Job ID | Pipeline | Run ID | Status
 ```
 
----
+your **Run ID will still go into RunId, Status into Status, and Job ID into JobId.**
 
-### ⚠️ Important
-
-**Don't add Excel action yet.**
-
-First create these Composes up to **SourceFile**.
-
-Then send me **one screenshot showing the bottom of Apply to each**. I'll give you the next block — **Excel Add Row + duplicate/header protection + final flow**.
-
-We are building it sequentially; **don't modify the previous steps.**
+One caution: if your CSV headers contain quoted text or unusual commas, this XPath approach depends on your existing header parsing being clean. Given your current flow, we should test **one row first (RunId + JobId)** before replacing all the other fields.
