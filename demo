@@ -7,23 +7,14 @@ trim(
           xml(
             concat(
               '<r><c>',
-              replace(
-                replace(
-                  replace(
-                    outputs('Compose_-_Header_Text'),
-                    '&',
-                    '&amp;'
-                  ),
-                  '<',
-                  '&lt;'
-                ),
-                '>',
-                '&gt;'
+              join(
+                outputs('Compose_-_Headers'),
+                '</c><c>'
               ),
               '</c></r>'
             )
           ),
-          'count(/r/c[.="Run ID"]/preceding-sibling::c)'
+          'count(/r/c[normalize-space(.)="Run ID"]/preceding-sibling::c)'
         )
       )
     )
