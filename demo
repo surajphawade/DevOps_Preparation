@@ -1,19 +1,510 @@
-trim(
-    first(
-        xpath(
-            xml(
-                concat(
-                    '<r>',
-                    '<h><c>',
-                    join(outputs('Compose_-_Headers'), '</c><c>'),
-                    '</c></h>',
-                    '<d><c>',
-                    join(outputs('Compose_-_Columns'), '</c><c>'),
-                    '</c></d>',
-                    '</r>'
-                )
-            ),
-            '/r/d/c[position() = count(/r/h/c[normalize-space(.)="Run ID"]/preceding-sibling::c)+1]'
-        )
-    )
-)
+Absolutely. Based on the automation structure you built, the Teams/Sherlock flow, and the SharePoint setup shown in your screenshots, I’d make the Confluence page feel like a **real PSS solution page**, not just a technical flow document.
+
+You can copy-paste the below directly into Confluence.
+
+---
+
+# PSS Production Support Automation Platform – Sherlock
+
+## 1. Overview
+
+The **PSS Production Support Automation Platform (Sherlock)** is an automation solution designed to simplify and standardize day-to-day production support activities for the PSS Wealth support team.
+
+The platform brings frequently performed support activities into a **single Teams-based interface**, allowing support members to retrieve information, track incidents, automate handover activities, and receive important notifications with minimal manual intervention.
+
+The solution uses **Microsoft Teams, Power Automate, SharePoint, Excel and Outlook** to automate repetitive operational activities and provide information to the support team when it is required.
+
+### Key Objectives
+
+* Reduce repetitive manual work performed by the PSS support team.
+* Provide faster access to ETL, ingestion and incident information.
+* Automate shift handover activities.
+* Reduce dependency on manually searching multiple files, emails and systems.
+* Standardize support processes and notifications.
+* Maintain operational information in centralized SharePoint-based datasets.
+* Improve response time and consistency during production support activities.
+
+---
+
+# 2. Solution at a Glance
+
+The platform follows a simple model:
+
+**Teams → Sherlock → Power Automate Flows → SharePoint / Excel / Outlook → Teams / Email Notifications**
+
+The support team interacts primarily through the **Teams group chat**, while Power Automate performs the required backend processing.
+
+### High-Level Components
+
+| Component               | Purpose                                                        |
+| ----------------------- | -------------------------------------------------------------- |
+| **Microsoft Teams**     | Primary interface for PSS users                                |
+| **Sherlock ChatBot**    | Receives commands and triggers required automation             |
+| **Power Automate**      | Orchestrates automation and business logic                     |
+| **SharePoint**          | Central location for operational datasets and automation files |
+| **Excel**               | Stores structured master/support data                          |
+| **Outlook**             | Source for operational emails and notification mechanism       |
+| **Teams Notifications** | Provides real-time information and alerts to support teams     |
+
+---
+
+# 3. Sherlock – Central Support Automation
+
+**Sherlock** acts as the common entry point for multiple PSS support automations.
+
+Instead of manually navigating through SharePoint folders, Excel files, emails and other sources, users can trigger the required functionality directly from the Teams group chat.
+
+### Current capabilities include
+
+* Incident information retrieval and tracking
+* ETL job information lookup
+* Ingestion/entity information lookup
+* Dependency identification
+* FileWatcher-related information
+* Entity threshold information
+* Automated handover updates
+* HO email automation
+* ETL group-wise HO updates
+* Automated email-based alerts
+
+The platform can also be extended with additional commands and support automations in the future.
+
+---
+
+# 4. Automation Flows
+
+## 4.1 Incident Alert Automation
+
+### Purpose
+
+Automates the process of capturing and tracking production incidents and making relevant information available to the support team.
+
+### What it does
+
+1. Automatically captures incident information.
+2. Extracts relevant incident details.
+3. Maintains incident information in the **Incident Tracker**.
+4. Stores/updates information in SharePoint/Excel.
+5. Sends notifications to the required Teams channels/groups.
+
+### Manual activity reduced
+
+Previously, support members needed to manually collect incident information, update tracking sheets and communicate updates.
+
+The automation reduces this repetitive effort and provides a more consistent incident tracking process.
+
+### Business value
+
+* Faster incident visibility.
+* Centralized incident tracking.
+* Reduced manual data entry.
+* Better consistency in incident information.
+* Improved communication across the support team.
+
+---
+
+# 4.2 ETL & Ingestion Job / Entity Information
+
+### Purpose
+
+Provides quick access to ETL and ingestion-related information through Sherlock.
+
+The automation removes the need to manually search through multiple Excel sheets or support documents to identify job information and dependencies.
+
+### ETL Information
+
+Users can search using:
+
+* ETL Job Name
+* ETL Job ID
+
+The automation retrieves available job-related information and identifies dependencies.
+
+### Ingestion / Entity Information
+
+Users can search using:
+
+* Entity Name
+* File Pattern
+
+The automation identifies the relevant ingestion information and associated ETL/dependency details.
+
+### Example Sherlock Commands
+
+**`/ETL`**
+
+Used to retrieve ETL job information.
+
+**`/Ing`**
+
+Used to retrieve ingestion/entity information.
+
+**`/FWEmail`**
+
+Used for FileWatcher-related information using the incident number and file pattern.
+
+**`/ETEMAIL`**
+
+Used for entity threshold-related email information.
+
+### Manual activity reduced
+
+Instead of manually:
+
+> Search Excel → Find job/entity → Check mapping → Identify dependency → Share information
+
+Sherlock performs the lookup and returns the information directly in Teams.
+
+### Business value
+
+* Faster investigation.
+* Reduced lookup time.
+* Improved dependency visibility.
+* Reduced dependency on individual team members knowing where information is stored.
+* Consistent information retrieval across shifts.
+
+---
+
+# 4.3 HO – Handover Automation
+
+### Purpose
+
+Automates the day-to-day **shift handover (HO)** process for the PSS team.
+
+The automation uses the existing HO data maintained by the support team and publishes the required information into Teams and email.
+
+### Key capabilities
+
+1. Automates handover updates.
+2. Publishes updates to the Teams group chat.
+3. Supports automated updates at regular intervals.
+4. Provides complete HO information.
+5. Provides BAU/ETL group-wise updates.
+6. Supports HO email generation.
+7. Notifies the required recipients through email.
+
+### Sherlock HO Commands
+
+**`/HO UPDATE`**
+
+Provides the latest HO updates in Teams.
+
+**`/HO EMAIL`**
+
+Used to generate/send the HO email.
+
+**`/HO GROUP`**
+
+Provides updates for the ETL groups.
+
+### Business value
+
+The HO process is a recurring operational activity. Automating it reduces repetitive work during every shift and provides a standardized handover format.
+
+This helps the team spend more time on **actual production support and issue resolution rather than preparing and distributing routine updates.**
+
+---
+
+# 4.4 Email Automation – FileWatcher / Entity Threshold
+
+### Purpose
+
+Automates the handling of specific operational emails such as **FileWatcher and Entity Threshold** notifications.
+
+The automation identifies relevant emails based on predefined conditions/keywords and performs the required downstream processing or notification.
+
+### Key capability
+
+* Automatically identify relevant operational emails.
+* Process FileWatcher-related information.
+* Process Entity Threshold-related information.
+* Provide required information to the support team.
+* Reduce manual email monitoring.
+
+### Business value
+
+Support members do not need to continuously monitor operational emails for specific scenarios.
+
+The automation acts as an additional layer of operational awareness and ensures important emails are processed consistently.
+
+---
+
+# 5. SharePoint – Central Data & Automation Repository
+
+The PSS automation solution uses SharePoint as a centralized location for operational data and supporting automation files.
+
+Current structure:
+
+**TDW**
+
+→ **WealthMonitoring**
+
+→ **MasterData**
+→ **HOAutomation**
+→ **ADF Exports**
+
+For the current Sherlock/automation documentation, the primary supporting folders are **MasterData** and **HOAutomation**.
+**ADF Exports is maintained separately and is not part of the current documented automation repository scope.**
+
+---
+
+## 5.1 MasterData
+
+The **MasterData** folder contains the master datasets used by the automation.
+
+One of the key datasets is the **ETL Mapping** information.
+
+### ETL Mapping
+
+The ETL Mapping dataset provides information required for:
+
+* ETL job identification
+* Job relationships
+* Dependency information
+* Entity/file pattern mapping
+* Support lookup activities
+
+This dataset acts as an important reference source for the Sherlock ETL and ingestion-related automations.
+
+### Why MasterData is important
+
+Keeping master information in a centralized location allows the automation to use a common dataset instead of maintaining separate information across multiple support members or individual files.
+
+---
+
+# 5.2 HOAutomation
+
+The **HOAutomation** folder contains the Excel-based HO information used by the Handover Automation.
+
+The HO sheet is used by the support team for day-to-day shift handover activities.
+
+The automation reads the required HO information and uses it to generate:
+
+* Teams HO updates
+* Group-wise updates
+* HO email content
+* Notifications
+
+This allows the existing support process to continue while automating the repetitive distribution and formatting activities around it.
+
+---
+
+# 5.3 Incident Tracker
+
+The **Incident Tracker** is maintained under the TDW SharePoint location.
+
+**Incident_Tracker.xlsx** is used to maintain incident-related tracking information.
+
+The Incident Alert automation uses this tracking mechanism to support:
+
+* Incident capture
+* Incident detail tracking
+* Status/operational visibility
+* Communication to the support team
+
+This provides a centralized reference point for incident-related information.
+
+---
+
+# 6. How the Platform Works
+
+The overall workflow can be represented as:
+
+**PSS Support User**
+
+↓
+
+**Microsoft Teams**
+
+↓
+
+**Sherlock ChatBot**
+
+↓
+
+**Power Automate**
+
+↓
+
+**Business Logic / Data Lookup**
+
+↓
+
+**SharePoint / Excel / Outlook**
+
+↓
+
+**Processed Information**
+
+↓
+
+**Teams / Email Notification**
+
+This approach keeps the user interaction simple while the underlying Power Automate flows perform the required processing.
+
+---
+
+# 7. Before vs After Automation
+
+| Activity                  | Traditional Approach             | With Sherlock                     |
+| ------------------------- | -------------------------------- | --------------------------------- |
+| Incident tracking         | Manual capture/update            | Automated processing and tracking |
+| ETL lookup                | Search multiple datasets         | Teams-based lookup                |
+| Dependency identification | Manual mapping/search            | Automated dependency retrieval    |
+| Ingestion lookup          | Manual Excel search              | Entity/File Pattern lookup        |
+| FileWatcher information   | Search email + mapping           | Automated lookup                  |
+| HO preparation            | Manual repetitive updates        | Automated HO processing           |
+| HO distribution           | Manual Teams/email communication | Automated Teams/email updates     |
+| Operational emails        | Manual monitoring                | Automated email processing        |
+| Information access        | Multiple sources                 | Centralized Teams interface       |
+
+---
+
+# 8. Operational Benefits
+
+### ⏱ Reduced Manual Effort
+
+Automates repetitive activities that are performed multiple times during daily production support.
+
+### 🚀 Faster Information Retrieval
+
+Support members can retrieve frequently required information directly from Teams instead of manually searching multiple sources.
+
+### 🔄 Standardized Process
+
+The same automation logic and format can be followed across shifts and team members.
+
+### 📊 Centralized Information
+
+SharePoint and master datasets provide a common reference point for support activities.
+
+### 📢 Better Communication
+
+Important information can be automatically pushed to Teams and email instead of relying completely on manual communication.
+
+### 👥 Reduced Individual Dependency
+
+Knowledge required for common support activities is embedded into the automation rather than depending only on individual team members.
+
+### 📈 Scalable Platform
+
+The current automations can be extended with additional commands, data sources and support use cases without changing the overall interaction model.
+
+---
+
+# 9. Business Impact
+
+The main value of the Sherlock platform is not only automation of individual tasks. It creates a **repeatable support operating model** for PSS.
+
+By reducing repetitive operational activities, the team can redirect effort towards:
+
+* Incident investigation
+* Production issue resolution
+* Root cause analysis
+* Preventive monitoring
+* Application stability
+* Service improvement
+
+The platform therefore supports both **operational efficiency and business continuity**.
+
+### Value Delivered
+
+**Manual Work ↓**
+
+**Lookup Time ↓**
+
+**Response Time ↓**
+
+**Operational Consistency ↑**
+
+**Information Availability ↑**
+
+**Support Team Productivity ↑**
+
+---
+
+# 10. Governance & Maintainability
+
+The automation is designed around centralized datasets and reusable Power Automate flows.
+
+### Key principles
+
+* Maintain master/reference information in SharePoint.
+* Keep operational datasets structured and reusable.
+* Use Teams as the primary user interaction layer.
+* Keep automation logic within Power Automate.
+* Standardize Teams notifications and responses.
+* Minimize manual duplication of information.
+* Maintain clear ownership of master/support data.
+
+This structure also makes it easier for future team members to understand where the source information is maintained and how each automation uses it.
+
+---
+
+# 11. Future Enhancement Opportunities
+
+The current Sherlock platform provides a foundation that can be expanded based on PSS requirements.
+
+Potential future enhancements include:
+
+* Additional Teams commands.
+* More automated incident workflows.
+* Advanced ETL monitoring integration.
+* Automated SLA/SLO notifications.
+* Automated support reports.
+* Integration with additional operational data sources.
+* Enhanced dashboards and operational analytics.
+* Automated RCA information retrieval.
+* More intelligent support recommendations.
+
+The objective would be to gradually move from **task automation → support automation → intelligent production support**.
+
+---
+
+# 12. Platform Summary
+
+**Sherlock is a centralized PSS support automation platform that brings multiple repetitive production-support activities into one Teams-based experience.**
+
+It combines **Teams, Power Automate, SharePoint, Excel and Outlook** to automate incident tracking, ETL/ingestion information lookup, dependency identification, handover activities and operational email processing.
+
+The solution reduces manual effort, improves information accessibility and standardizes recurring support processes while providing a foundation for further PSS automation.
+
+> **From manually searching and communicating information to a centralized, automated and reusable support experience.**
+
+---
+
+## 13. Quick Reference – Sherlock Commands
+
+| Command      | Purpose                                        |
+| ------------ | ---------------------------------------------- |
+| `/INFO`      | Displays available Sherlock commands and usage |
+| `/ETL`       | Search ETL information by Job Name / Job ID    |
+| `/Ing`       | Search ingestion/entity information            |
+| `/FWEmail`   | Retrieve FileWatcher-related information       |
+| `/ETEMAIL`   | Handle Entity Threshold-related information    |
+| `/HO UPDATE` | Display latest HO updates                      |
+| `/HO EMAIL`  | Generate/send HO email                         |
+| `/HO GROUP`  | Display ETL group-wise HO updates              |
+
+---
+
+## 14. Repository Reference
+
+For future users/support members, the supporting files can be found under:
+
+**TDW → WealthMonitoring**
+
+| Folder/File               | Usage                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| **MasterData**            | Master/reference datasets such as ETL Mapping                                           |
+| **HOAutomation**          | HO/Handover data used by HO automation                                                  |
+| **Incident_Tracker.xlsx** | Incident tracking information                                                           |
+| **ADF Exports**           | ADF exported data – maintained separately from the current Sherlock documentation scope |
+
+This repository structure should be used as the reference point when troubleshooting, maintaining or enhancing the Sherlock automations.
+
+---
+
+### Executive One-Liner
+
+> **Sherlock transforms repetitive PSS production-support activities into a centralized Teams-based automation platform, reducing manual effort and lookup time while improving operational consistency, information availability and support productivity.**
